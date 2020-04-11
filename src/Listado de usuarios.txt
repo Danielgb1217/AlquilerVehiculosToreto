@@ -1,0 +1,7 @@
+login;password;tipousuario;nombre;apellido;cedula
+Danielgb1217@gmail.com;1217;1;Daniel;Gonzalez;1053827199
+Hectorelfather@hotmail.com;1217;2;Hector;ElFather;10279380
+Dagonzalez85533@umanizales.edu.co;1217;3;Andres;Betancourt;82201920256
+Yuliana@umanizales.edu.co;1217;3;Yuliana;Pineda;82202023354
+Emiavila968@gmail.com;1234;2;Idaly;Avila;1002543284
+d@d.com;1;1;dan;abs;2323
