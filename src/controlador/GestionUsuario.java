@@ -1,5 +1,6 @@
 package controlador;
 
+import Excepciones.*;
 import java.util.*;
 import java.util.regex.*;
 import modelo.*;
@@ -43,24 +44,32 @@ public class GestionUsuario {
 
     }
 
-    public Usuario validarUsuario(String login, String password) {
-
-        for (Usuario usuarioAutenticado :  lstUsuarios) {
+    public Usuario validarUsuario(String login, String password) throws UsuarioException {
+        for (Usuario usuarioAutenticado : lstUsuarios) {
 //            System.out.println("usuarioAutenticado = " + usuarioAutenticado);
-            if (usuarioAutenticado.getLogin().compareTo(login)==0 && usuarioAutenticado.getPasswd().compareTo(password)==0 )  {
+            if (usuarioAutenticado.getLogin().compareTo(login) == 0 && usuarioAutenticado.getPasswd().compareTo(password) == 0) {
 
                 return usuarioAutenticado;
             }
 
-    }
-
+        }
+        if (true) {
+            throw new UsuarioException("El usuario no se encuentra registrado");
+        }
         return null;
     }
 
-    public boolean validarEmail(String email) {
+    public boolean validarEmail(String email) throws UsuarioException {
+
         Pattern pattern = Pattern.compile("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$");
         Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+
+        if (matcher.matches()) {
+            return matcher.matches();
+        } else {
+            throw new UsuarioException("Los datos de ingreso estan erroneos");
+        }
+
     }
 
     /**

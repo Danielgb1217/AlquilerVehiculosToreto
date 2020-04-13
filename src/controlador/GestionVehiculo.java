@@ -2,6 +2,7 @@ package controlador;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.regex.*;
 import modelo.*;
 import utilidades.LeerArchivoPlano;
 import vista.MdiVehiculos;
@@ -24,10 +25,10 @@ public class GestionVehiculo implements Serializable {
     public void llenarVehiculos() {
 
         //if (lstCamionetas.isEmpty() || lstCarros.isEmpty() || lstMotos.isEmpty()) {//para que no borre la lista cuando llame n
-            lstCamionetas = LeerArchivoPlano.cargarCamionetas(tipoVehiculo);
-            lstCarros = LeerArchivoPlano.cargarCarros(tipoVehiculo);
-            lstMotos = LeerArchivoPlano.cargarMotos(tipoVehiculo);
-       // }
+        lstCamionetas = LeerArchivoPlano.cargarCamionetas(tipoVehiculo);
+        lstCarros = LeerArchivoPlano.cargarCarros(tipoVehiculo);
+        lstMotos = LeerArchivoPlano.cargarMotos(tipoVehiculo);
+        // }
     }
 
     public void registrarVehiculo(AbstractVehiculo vehiculo) {
@@ -73,13 +74,13 @@ public class GestionVehiculo implements Serializable {
         this.tipoVehiculo = tipoVehiculo;
     }
 
-    //-------------------------------Validacion Configuracion vehiculo--
-    
+    //-------------------------------Validacion  Placa vehiculo 
+    //Expresion regular para validar matriculas de carros y motos con el formato
+    //XXX###    XXX33X
+    public  boolean validarMatricula(String matricula) {
+        Pattern pattern = Pattern.compile("[a-zA-Z]{3}[0-9]{3}|[a-zA-Z]{3}[0-9]{2}[a-zA-Z]");
+        Matcher matcher = pattern.matcher(matricula);
+        return matcher.matches();
+    }
 
-    
-    
-    
-    
-    
-    
 }

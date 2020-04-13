@@ -2,6 +2,11 @@
 package utilidades;
 //
 //import javax.swing.JOptionPane;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 //import modelo.TipoUsuario;
 //import modelo.Usuario;
 //
@@ -9,17 +14,34 @@ package utilidades;
 // *
 // * @author tecnicoper1
 // */
-//public class Prueba {
+public class Prueba {
 //     private  static TipoUsuario[] tipoUsuario;
 //      
 //    
-//       public static void main(String[] args) {
-//        
-//           int x = OptionPane.inputMessageDialog(null,"ingrese datos");
-//           System.out.println(" El arreglo es " + x);
-//        
+//      public static boolean validarEmail(String email) {
+//        Pattern pattern = Pattern.compile("[a-zA-Z]{3}[0-9]{3}|[a-zA-Z]{3}[0-9]{2}[a-zA-Z]");
+//        Matcher matcher = pattern.matcher(email);
+//        return matcher.matches();
 //    }
-// 
+//    
+       public static void main(String[] args) {
+//while(true){
+//     String x =JOptionPane.showInputDialog("Ingrese placa");
+//       
+//   if(validarEmail(x)){
+//       
+//       JOptionPane.showMessageDialog(null, "correcto");
+//       
+//   }
+//               
+//   else{
+//       JOptionPane.showMessageDialog(null, "incorrecto");
+//   }
+//}
+//       
+           
+           
+           
 //        
 //public static TipoUsuario[] arreglo(){
 //
@@ -28,11 +50,11 @@ package utilidades;
 //        tipoUsuario[1] = new TipoUsuario((byte)2, "User");
 //        tipoUsuario[2] = new TipoUsuario((byte)3, "Secretary");
 //    return tipoUsuario;
-//}
+}
 //    
 //    
 //        
 //        
 //        
 //        
-//}
+}

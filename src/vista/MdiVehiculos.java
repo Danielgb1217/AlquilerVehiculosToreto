@@ -1,7 +1,9 @@
 package vista;
 
+import Excepciones.UsuarioException;
 import Excepciones.VehiculosException;
 import controlador.*;
+import java.awt.Color;
 import java.beans.PropertyVetoException;
 import java.util.logging.*;
 import javafx.scene.control.PasswordField;
@@ -64,6 +66,9 @@ public class MdiVehiculos extends javax.swing.JFrame {
         chbDisponibilidad = new javax.swing.JCheckBox();
         jspCapacidadVehiculo = new javax.swing.JSpinner();
         jcbTipoVehiculo = new javax.swing.JComboBox<>();
+        btnBuscar = new javax.swing.JButton();
+        btnDesactivar = new javax.swing.JButton();
+        btnActivar = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         mnuPrincipal = new javax.swing.JMenu();
         mnuVehiculosDisponilbes = new javax.swing.JMenuItem();
@@ -143,91 +148,116 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
         tblListadosCamionetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)}
             },
             new String [] {
-                "Tipo", "Capacidad", "Matricula", "Km", "Disponibilidad", "Valor de Alquiler"
+                "Tipo", "Capacidad", "Matricula", "Km", "Disponibilidad", "Valor de Alquiler", "Activo/Inactivo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Short.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.Short.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblListadosCamionetas);
 
         tblListadoCarros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)}
             },
             new String [] {
-                "Tipo", "Extras", "Matricula", "Km", "Disponibilidad", "Valor de Alquiler"
+                "Tipo", "Extras", "Matricula", "Km", "Disponibilidad", "Valor de Alquiler", "Activo/Inactivo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(tblListadoCarros);
 
         tblListadoMotos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)},
+                {null, null, null, null, null, null,  new Boolean(true)}
             },
             new String [] {
-                "Tipo", "Casco", "Matricula", "Km", "Disponibilidad", "Valor de Alquiler"
+                "Tipo", "Casco", "Matricula", "Km", "Disponibilidad", "Valor de Alquiler", "Activo/Inactivo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, true
+                true, true, true, true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -246,11 +276,11 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
         jLabel6.setText("Capacidad");
 
-        jLabel7.setText("Matricula");
+        jLabel7.setText("Matricula*");
 
-        jLabel8.setText("Km");
+        jLabel8.setText("Km*");
 
-        jLabel10.setText("Valor Alquiler");
+        jLabel10.setText("Valor Alquiler*");
 
         btnAgregarVehiculo.setText("Agregar");
         btnAgregarVehiculo.addActionListener(new java.awt.event.ActionListener() {
@@ -285,6 +315,27 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
         jcbTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Camioneta", "Carro", "Moto" }));
 
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        btnDesactivar.setText("Desactivar");
+        btnDesactivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesactivarActionPerformed(evt);
+            }
+        });
+
+        btnActivar.setText("Activar");
+        btnActivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActivarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpConfiguracionVehiculoLayout = new javax.swing.GroupLayout(jpConfiguracionVehiculo);
         jpConfiguracionVehiculo.setLayout(jpConfiguracionVehiculoLayout);
         jpConfiguracionVehiculoLayout.setHorizontalGroup(
@@ -293,45 +344,57 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpConfiguracionVehiculoLayout.createSequentialGroup()
-                        .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpConfiguracionVehiculoLayout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtValorAlquiler))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpConfiguracionVehiculoLayout.createSequentialGroup()
+                                    .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jpConfiguracionVehiculoLayout.createSequentialGroup()
+                                            .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jpConfiguracionVehiculoLayout.createSequentialGroup()
+                                                    .addComponent(jspCapacidadVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(chbExtras)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(chbCasco))
+                                                .addComponent(jcbTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpConfiguracionVehiculoLayout.createSequentialGroup()
+                                    .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(chbDisponibilidad)
+                                        .addComponent(txtMatricula)
+                                        .addComponent(txtKm))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpConfiguracionVehiculoLayout.createSequentialGroup()
-                                .addComponent(btnAgregarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminarVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpConfiguracionVehiculoLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtValorAlquiler))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpConfiguracionVehiculoLayout.createSequentialGroup()
-                                .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jpConfiguracionVehiculoLayout.createSequentialGroup()
-                                        .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jpConfiguracionVehiculoLayout.createSequentialGroup()
-                                                .addComponent(jspCapacidadVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(chbExtras)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(chbCasco))
-                                            .addComponent(jcbTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpConfiguracionVehiculoLayout.createSequentialGroup()
-                                .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(chbDisponibilidad)
-                                    .addComponent(txtMatricula)
-                                    .addComponent(txtKm))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGuardarConfiguracionVehiculo))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                                .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpConfiguracionVehiculoLayout.createSequentialGroup()
+                                        .addComponent(btnAgregarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnEliminarVehiculo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnBuscar)))
+                                .addGap(0, 67, Short.MAX_VALUE)))
+                        .addGap(37, 37, 37))
+                    .addGroup(jpConfiguracionVehiculoLayout.createSequentialGroup()
+                        .addComponent(btnDesactivar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardarConfiguracionVehiculo)
+                        .addGap(26, 26, 26))
+                    .addGroup(jpConfiguracionVehiculoLayout.createSequentialGroup()
+                        .addComponent(btnActivar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jpConfiguracionVehiculoLayout.setVerticalGroup(
             jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,10 +432,16 @@ public class MdiVehiculos extends javax.swing.JFrame {
                         .addComponent(txtValorAlquiler, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37)
                 .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGuardarConfiguracionVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminarVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(btnAgregarVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEliminarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(146, Short.MAX_VALUE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnActivar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpConfiguracionVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardarConfiguracionVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDesactivar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jifListadoVehiculosLayout = new javax.swing.GroupLayout(jifListadoVehiculos.getContentPane());
@@ -380,15 +449,14 @@ public class MdiVehiculos extends javax.swing.JFrame {
         jifListadoVehiculosLayout.setHorizontalGroup(
             jifListadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jifListadoVehiculosLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(jifListadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jifListadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addGroup(jifListadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
                 .addComponent(jpConfiguracionVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jifListadoVehiculosLayout.setVerticalGroup(
             jifListadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,11 +470,11 @@ public class MdiVehiculos extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         desktopPane.add(jifListadoVehiculos);
-        jifListadoVehiculos.setBounds(640, 0, 1097, 577);
+        jifListadoVehiculos.setBounds(640, 0, 1078, 577);
         try {
             jifListadoVehiculos.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -514,25 +582,27 @@ public class MdiVehiculos extends javax.swing.JFrame {
         } //validacion si es un correo electronico Expresion regular 
         else {
 
-            if (gestionUsuario.validarEmail(txtLogin.getText())) {
+            try {
+                if (gestionUsuario.validarEmail(txtLogin.getText())) {
 
-                //Validar que el usuario este REGISTRADO
-                usuarioAutenticado = gestionUsuario.validarUsuario(txtLogin.getText(), txtPassword.getText());
-                if (usuarioAutenticado != null) {
+                    //Validar que el usuario este REGISTRADO
+                    usuarioAutenticado = gestionUsuario.validarUsuario(txtLogin.getText(), txtPassword.getText());
+                    if (usuarioAutenticado != null) {
 
-                    gestionVehiculo = new GestionVehiculo();    //cargo las vehiculos del archivo a la lista
-                    JOptionPane.showMessageDialog(this, "Bienvenido " + usuarioAutenticado, "Ingresó como "
-                            + usuarioAutenticado.getTipoUsuario().getDescripcion(), 2);
-                    mnuPrincipal.setEnabled(true);
-                    jifLogin.hide();
-                    gestionPermisosMnu();   //habilita los menus
-                } else {
-                    JOptionPane.showMessageDialog(this, "Error", "Datos de Ingreso Erroneos", 2);
+                        gestionVehiculo = new GestionVehiculo();    //cargo las vehiculos del archivo a la lista
+                        JOptionPane.showMessageDialog(this, "Bienvenido " + usuarioAutenticado, "Ingresó como "
+                                + usuarioAutenticado.getTipoUsuario().getDescripcion(), 2);
+                        mnuPrincipal.setEnabled(true);
+                        jifLogin.hide();
+                        gestionPermisosMnu();   //habilita los menus
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error", "Datos de Ingreso Erroneos", 2);
+
+                    }
 
                 }
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Error", "Email no esta bien diligenciado", 0);
+            } catch (UsuarioException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos Erroneos", 0);
             }
 
         }
@@ -540,7 +610,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void mnuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCerrarSesionActionPerformed
-
         mnuPrincipal.setEnabled(false);
         txtLogin.setText("");
         txtPassword.setText("");
@@ -597,6 +666,9 @@ public class MdiVehiculos extends javax.swing.JFrame {
         pintarLstCamionetas();
         pintarLstMotos();
         jifListadoVehiculos.show();
+        verificarCamionetasInactivos();
+        verificarCarrosInactivos();
+        verificarMotosInactivos();
 
         if (jifListadoVehiculos.isIcon()) {   //SI esta minimizada al presiona en el menu se maximiza
 
@@ -615,18 +687,50 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_mnuEditarVehiculosActionPerformed
-
-    private boolean validarCamposConfiguracionVehiculo() {
-
-        if (txtMatricula.getText() != null && txtKm.getText() != null
-                && txtValorAlquiler.getText() != null) {
+    private boolean validarCampoKm() {
+        try {
+            Integer.parseInt(txtKm.getText());
             return true;
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe diligenciar todos los campos", "Datos Faltantes", 0);
+        } catch (NumberFormatException nfe) {
+            return false;
         }
+    }
 
+    private boolean validarCampoValorAlquiler() {
+        try {
+            Double.parseDouble(txtValorAlquiler.getText());
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    private boolean validarCampoCapacidad() {
+        try {
+            Double.parseDouble(txtValorAlquiler.getText());
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+//Validacion de campos de configurcion y captura de excepciones
+    //Los campos numericos deben tener numeros y no letras y el campo de matricula debe terner un formato valido
+    private boolean validarCamposConfiguracionVehiculo() throws VehiculosException {
+
+        if (validarCampoKm() && validarCampoValorAlquiler()) {
+            if (Integer.parseInt(txtKm.getText()) >= 0 && Double.parseDouble(txtValorAlquiler.getText()) > 0) {
+
+                if (gestionVehiculo.validarMatricula(txtMatricula.getText())) {
+                    return true;
+                } else {
+                    throw new VehiculosException("Debe diligenciar una placa valida");
+                }
+            }
+        } else {
+            throw new VehiculosException("Debe diligenciar valores numericos en los campos Km y Valor Alquiler");
+        }
         return false;
-
     }
 
     private void limpiarCamposConfiguracion() {
@@ -644,55 +748,55 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     private void btnAgregarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarVehiculoActionPerformed
 
-        if (validarCamposConfiguracionVehiculo()) {
-            String itemCamioneta = "" + jcbTipoVehiculo.getSelectedItem();
-            String itemCarro = "" + jcbTipoVehiculo.getSelectedItem();
-            String itemMoto = "" + jcbTipoVehiculo.getSelectedItem();
-            if (itemCamioneta.compareToIgnoreCase("camioneta") == 0 && ((short) jspCapacidadVehiculo.getValue()>0)) {
+        try {
+            if (validarCamposConfiguracionVehiculo()) {
+                String itemCamioneta = "" + jcbTipoVehiculo.getSelectedItem();
+                String itemCarro = "" + jcbTipoVehiculo.getSelectedItem();
+                String itemMoto = "" + jcbTipoVehiculo.getSelectedItem();
+                String capacidad = "" + jspCapacidadVehiculo.getValue();
+                if (itemCamioneta.compareToIgnoreCase("camioneta") == 0 && (Short.parseShort(capacidad) > 0)) {
 
-                Camioneta camioneta = new Camioneta((new TipoVehiculo("Camioneta", (byte) 1)), (short) jspCapacidadVehiculo.getValue(),
-                        txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
-                        Double.parseDouble(txtValorAlquiler.getText()));
-                if (validarCamioneta(camioneta)) {
-                    JOptionPane.showMessageDialog(this, "La camioneta ya existe", "Warning", 1);
-                } else {
-
-                    //Convierto el objeto camion en un arreglo de tipo object a traves del metodo y adiciono este arreglo a la tabla    
-                    DefaultTableModel modelo = (DefaultTableModel) tblListadosCamionetas.getModel();
-                    modelo.addRow(camioneta.obtenerArregloObjeto());
-                }
+                    Camioneta camioneta = new Camioneta((new TipoVehiculo("Camioneta", (byte) 1)), (short) jspCapacidadVehiculo.getValue(),
+                            txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                            Double.parseDouble(txtValorAlquiler.getText()));
+                    if (!validarCamioneta(camioneta)) {
+                        //Convierto el objeto camion en un arreglo de tipo object a traves del metodo y adiciono este arreglo a la tabla
+                        DefaultTableModel modelo = (DefaultTableModel) tblListadosCamionetas.getModel();
+                        modelo.addRow(camioneta.obtenerArregloObjeto());
+                    }
 //-------------------------------Validacion de carro---------------------
-            } else if (itemCarro.compareToIgnoreCase("carro") == 0) {
+                } else if (itemCarro.compareToIgnoreCase("carro") == 0) {
 
-                Carro carro = new Carro((new TipoVehiculo("Carro", (byte) 2)), chbExtras.isSelected(),
-                        txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
-                        Double.parseDouble(txtValorAlquiler.getText()));
-                if (validarCarro(carro))  {
-                    JOptionPane.showMessageDialog(this, "El carro ya existe", "Warning", 1);
-                } else {
-                    //Convierto el objeto camion en un arreglo de tipo object a traves del metodo y adiciono este arreglo a la tabla    
-                    DefaultTableModel modelo = (DefaultTableModel) tblListadoCarros.getModel();
-                    modelo.addRow(carro.obtenerArregloObjeto());
-                }
-            } //-------------------------------------validacion tipo moto
-            else if (itemMoto.compareToIgnoreCase("moto") == 0) {
+                    Carro carro = new Carro((new TipoVehiculo("Carro", (byte) 2)), chbExtras.isSelected(),
+                            txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                            Double.parseDouble(txtValorAlquiler.getText()));
+                    if (!validarCarro(carro)) {
+                        //Convierto el objeto camion en un arreglo de tipo object a traves del metodo y adiciono este arreglo a la tabla
+                        DefaultTableModel modelo = (DefaultTableModel) tblListadoCarros.getModel();
+                        modelo.addRow(carro.obtenerArregloObjeto());
+                    }
+                } //-------------------------------------validacion tipo moto
+                else if (itemMoto.compareToIgnoreCase("moto") == 0) {
 
-                Moto moto = new Moto((new TipoVehiculo("Moto", (byte) 3)), chbCasco.isSelected(),
-                        txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
-                        Double.parseDouble(txtValorAlquiler.getText()));
-                if (validarMoto(moto)) {
-                    JOptionPane.showMessageDialog(this, "La moto ya existe", "Warning", 1);
+                    Moto moto = new Moto((new TipoVehiculo("Moto", (byte) 3)), chbCasco.isSelected(),
+                            txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                            Double.parseDouble(txtValorAlquiler.getText()));
+                    if (!validarMoto(moto)) {
+                        //Convierto el objeto camion en un arreglo de tipo object a traves del metodo y adiciono este arreglo a la tabla
+                        DefaultTableModel modelo = (DefaultTableModel) tblListadoMotos.getModel();
+                        modelo.addRow(moto.obtenerArregloObjeto());
+                    }
                 } else {
-                    //Convierto el objeto camion en un arreglo de tipo object a traves del metodo y adiciono este arreglo a la tabla    
-                    DefaultTableModel modelo = (DefaultTableModel) tblListadoMotos.getModel();
-                    modelo.addRow(moto.obtenerArregloObjeto());
+                    JOptionPane.showMessageDialog(this, "La capacidad de la camioneta debe ser mayor que cero", "Datos Erroneos", 0);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Debe diligenciar campos complementarios correctamente", "Datos Faltantes", 0);
+
             }
-
+        } catch (VehiculosException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos Erroneos", 0);
         }
+
         limpiarCamposConfiguracion();
+
 
     }//GEN-LAST:event_btnAgregarVehiculoActionPerformed
 
@@ -711,77 +815,89 @@ public class MdiVehiculos extends javax.swing.JFrame {
         } else if (tblListadoMotos.getSelectedRow() != -1) {
             DefaultTableModel modelo = (DefaultTableModel) tblListadoMotos.getModel();
             modelo.removeRow(tblListadoMotos.getSelectedRow());
-        } else if (validarCamposConfiguracionVehiculo() ) {
+        } else {
+            try {
+                if (validarCamposConfiguracionVehiculo()) {
 
-            if (itemCamioneta.compareToIgnoreCase("camioneta") == 0) {
+                    if (itemCamioneta.compareToIgnoreCase("camioneta") == 0) {
 
-                Camioneta camioneta = new Camioneta((new TipoVehiculo("Camioneta", (byte) 1)), (short) jspCapacidadVehiculo.getValue(),
-                        txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
-                        Double.parseDouble(txtValorAlquiler.getText()));
+                        Camioneta camioneta = new Camioneta((new TipoVehiculo("Camioneta", (byte) 1)), (short) jspCapacidadVehiculo.getValue(),
+                                txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                                Double.parseDouble(txtValorAlquiler.getText()));
 
-                //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
-                for (int i = 0; i < tblListadosCamionetas.getRowCount(); i++) {
+                        //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
+                        for (int i = 0; i < tblListadosCamionetas.getRowCount(); i++) {
 
-                    Camioneta camionetaTabla = obtenerObjetoTablaCamionetas(i);
-                    if (camioneta.toString().equals(camionetaTabla.toString())) {
+                            Camioneta camionetaTabla = obtenerObjetoTablaCamionetas(i);
+                            if (camioneta.toString().equals(camionetaTabla.toString())) {
 
-                        DefaultTableModel modelo = (DefaultTableModel) tblListadosCamionetas.getModel();
-                        modelo.removeRow(i);
-                        JOptionPane.showMessageDialog(this, "eliminar archivo", "Dat", 0);
-                        break;
+                                DefaultTableModel modelo = (DefaultTableModel) tblListadosCamionetas.getModel();
+                                modelo.removeRow(i);
+                                JOptionPane.showMessageDialog(this, "eliminar archivo", "Dat", 0);
+                                break;
+                            }
+
+                        }
+
+                    } //Validacion para el tipo carro  ---------------------------------------------------------------
+                    else if (itemCarro.compareToIgnoreCase("carro") == 0) {
+
+                        Carro carro = new Carro((new TipoVehiculo("Carro", (byte) 2)), chbExtras.isSelected(),
+                                txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                                Double.parseDouble(txtValorAlquiler.getText()));
+
+                        //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
+                        for (int i = 0; i < tblListadoCarros.getRowCount(); i++) {
+
+                            Carro carroTabla = obtenerObjetoTablaCarro(i);
+                            if (carro.toString().equals(carroTabla.toString())) {
+
+                                DefaultTableModel modelo = (DefaultTableModel) tblListadoCarros.getModel();
+                                modelo.removeRow(i);
+                                JOptionPane.showMessageDialog(this, "eliminar archivo", "Warning", 0);
+                                break;
+                            }
+
+                        }
+
+                    } //------------------------------------validacion para tipo Moto
+                    else if (itemMoto.compareToIgnoreCase("moto") == 0) {
+
+                        Moto moto = new Moto((new TipoVehiculo("Moto", (byte) 3)), chbCasco.isSelected(),
+                                txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                                Double.parseDouble(txtValorAlquiler.getText()));
+
+                        //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
+                        for (int i = 0; i < tblListadoMotos.getRowCount(); i++) {
+
+                            Moto motoTabla = obtenerObjetoTablaMoto(i);
+                            if (moto.toString().equals(motoTabla.toString())) {
+
+                                DefaultTableModel modelo = (DefaultTableModel) tblListadoMotos.getModel();
+                                modelo.removeRow(i);
+                                JOptionPane.showMessageDialog(this, "eliminar archivo", "Warning", 0);
+                                break;
+                            }
+
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Debe diligenciar tipo Y/O Capacidad, casco, Eztra",
+                                "Datos Faltantes", 0);
                     }
+                    limpiarCamposConfiguracion();
 
                 }
-
-            } //Validacion para el tipo carro  ---------------------------------------------------------------
-            else if (itemCarro.compareToIgnoreCase("carro") == 0) {
-
-                Carro carro = new Carro((new TipoVehiculo("Carro", (byte) 2)), chbExtras.isSelected(),
-                        txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
-                        Double.parseDouble(txtValorAlquiler.getText()));
-
-                //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
-                for (int i = 0; i < tblListadoCarros.getRowCount(); i++) {
-
-                    Carro carroTabla = obtenerObjetoTablaCarro(i);
-                    if (carro.toString().equals(carroTabla.toString())) {
-
-                        DefaultTableModel modelo = (DefaultTableModel) tblListadoCarros.getModel();
-                        modelo.removeRow(i);
-                        JOptionPane.showMessageDialog(this, "eliminar archivo", "Warning", 0);
-                        break;
-                    }
-
-                }
-
-            } //------------------------------------validacion para tipo Moto
-            else if (itemMoto.compareToIgnoreCase("moto") == 0) {
-
-                Moto moto = new Moto((new TipoVehiculo("Moto", (byte) 3)), chbCasco.isSelected(),
-                        txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
-                        Double.parseDouble(txtValorAlquiler.getText()));
-
-                //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
-                for (int i = 0; i < tblListadoMotos.getRowCount(); i++) {
-
-                    Moto motoTabla = obtenerObjetoTablaMoto(i);
-                    if (moto.toString().equals(motoTabla.toString())) {
-
-                        DefaultTableModel modelo = (DefaultTableModel) tblListadoMotos.getModel();
-                        modelo.removeRow(i);
-                        JOptionPane.showMessageDialog(this, "eliminar archivo", "Warning", 0);
-                        break;
-                    }
-
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Debe diligenciar tipo Y/O Capacidad, casco, Eztra",
-                        "Datos Faltantes", 0);
+            } catch (VehiculosException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos Erroneos", 0);
             }
-            limpiarCamposConfiguracion();
+        }
+
+        limpiarCamposConfiguracion();
+
+
     }//GEN-LAST:event_btnEliminarVehiculoActionPerformed
-    }
+
     private void btnGuardarConfiguracionVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarConfiguracionVehiculoActionPerformed
 
         EscribirArchivoPlano.borrarArchivo();
@@ -806,73 +922,382 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
             EscribirArchivoPlano.escribirMoto(motoTabla);
         }
-        JOptionPane.showMessageDialog(null, "Se ha grabado el vehiculo en la Lista");
+        JOptionPane.showMessageDialog(null, "Se han guardado los cambios con exito");
         limpiarCamposConfiguracion();
     }//GEN-LAST:event_btnGuardarConfiguracionVehiculoActionPerformed
 
-    public Camioneta obtenerObjetoTablaCamionetas(int numeroFila) {
-        Object[] fila = new Object[6];
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        for (int i = 0; i < 6; i++) {
-//              
-            fila[i] = tblListadosCamionetas.getValueAt(numeroFila, i);
+        try {
+            if (validarCamposConfiguracionVehiculo()) {
+                String itemCamioneta = "" + jcbTipoVehiculo.getSelectedItem();
+                String itemCarro = "" + jcbTipoVehiculo.getSelectedItem();
+                String itemMoto = "" + jcbTipoVehiculo.getSelectedItem();
+                String capacidad = "" + jspCapacidadVehiculo.getValue();
+                if (itemCamioneta.compareToIgnoreCase("camioneta") == 0 && (Short.parseShort(capacidad) > 0)) {
 
+                    Camioneta camioneta = new Camioneta((new TipoVehiculo("Camioneta", (byte) 1)), (short) jspCapacidadVehiculo.getValue(),
+                            txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                            Double.parseDouble(txtValorAlquiler.getText()));
+                    if (!buscarCamioneta(camioneta)) {
+                        JOptionPane.showMessageDialog(this, "El vehiculo no se encuentra registrado", "Resultado", 0);
+                    }
+//-------------------------------Validacion de carro---------------------
+                } else if (itemCarro.compareToIgnoreCase("carro") == 0) {
+
+                    Carro carro = new Carro((new TipoVehiculo("Carro", (byte) 2)), chbExtras.isSelected(),
+                            txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                            Double.parseDouble(txtValorAlquiler.getText()));
+                    if (!buscarCarro(carro)) {
+                        JOptionPane.showMessageDialog(this, "El vehiculo no se encuentra registrado", "Resultado", 0);
+                    }
+                } //-------------------------------------validacion tipo moto
+                else if (itemMoto.compareToIgnoreCase("moto") == 0) {
+
+                    Moto moto = new Moto((new TipoVehiculo("Moto", (byte) 3)), chbCasco.isSelected(),
+                            txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                            Double.parseDouble(txtValorAlquiler.getText()));
+                    if (!buscarMoto(moto)) {
+                        JOptionPane.showMessageDialog(this, "El vehiculo no se encuentra registrado", "Resultado", 0);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "La capacidad de la camioneta debe ser mayor que cero", "Datos Erroneos", 0);
+                }
+
+            }
+        } catch (VehiculosException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos Erroneos", 0);
         }
 
+        limpiarCamposConfiguracion();
+
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void verificarCamionetasInactivos() {
+        DefaultTableModel modelo = (DefaultTableModel) tblListadosCamionetas.getModel();
+        for (int i = 0; i < tblListadosCamionetas.getRowCount(); i++) {
+            Camioneta camionetaTabla = obtenerObjetoTablaCamionetas(i);
+            if (!gestionVehiculo.validarMatricula(camionetaTabla.getMatricula())) {
+                modelo.setValueAt(false, i, 6);
+            } else {
+                modelo.setValueAt(true, i, 6);
+            }
+        }
+    }
+
+    private void verificarCarrosInactivos() {
+        DefaultTableModel modelo1 = (DefaultTableModel) tblListadoCarros.getModel();
+        for (int i = 0; i < tblListadoCarros.getRowCount(); i++) {
+            Carro carroTabla = obtenerObjetoTablaCarro(i);
+            if (!gestionVehiculo.validarMatricula(carroTabla.getMatricula())) {
+                modelo1.setValueAt(false, i, 6);
+            } else {
+                modelo1.setValueAt(true, i, 6);
+            }
+        }
+    }
+
+    private void verificarMotosInactivos() {
+        DefaultTableModel modelo2 = (DefaultTableModel) tblListadoMotos.getModel();
+        for (int i = 0; i < tblListadoMotos.getRowCount(); i++) {
+            Moto motoTabla = obtenerObjetoTablaMoto(i);
+            if (!gestionVehiculo.validarMatricula(motoTabla.getMatricula())) {
+                modelo2.setValueAt(false, i, 6);
+            } else {
+                modelo2.setValueAt(true, i, 6);
+            }
+        }
+    }
+
+    private void btnDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesactivarActionPerformed
+
+        String itemCamioneta = "" + jcbTipoVehiculo.getSelectedItem();
+        String itemCarro = "" + jcbTipoVehiculo.getSelectedItem();
+        String itemMoto = "" + jcbTipoVehiculo.getSelectedItem();
+
+        if (tblListadosCamionetas.getSelectedRow() != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) tblListadosCamionetas.getModel();
+            modelo.setValueAt("Inhabilitado " + modelo.getValueAt(tblListadosCamionetas.getSelectedRow(), 2), tblListadosCamionetas.getSelectedRow(), 2);
+            modelo.setValueAt(false, tblListadosCamionetas.getSelectedRow(), 4);
+            modelo.setValueAt(false, tblListadosCamionetas.getSelectedRow(), 6);
+            tblListadosCamionetas.setSelectionForeground(Color.RED);
+
+        } else if (tblListadoCarros.getSelectedRow() != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) tblListadoCarros.getModel();
+            modelo.setValueAt("Inhabilitado " + modelo.getValueAt(tblListadoCarros.getSelectedRow(), 2), tblListadoCarros.getSelectedRow(), 2);
+            modelo.setValueAt(false, tblListadoCarros.getSelectedRow(), 4);
+            modelo.setValueAt(false, tblListadoCarros.getSelectedRow(), 6);
+            tblListadoCarros.setSelectionForeground(Color.RED);
+
+        } else if (tblListadoMotos.getSelectedRow() != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) tblListadoMotos.getModel();
+            modelo.setValueAt("Inhabilitado " + modelo.getValueAt(tblListadoMotos.getSelectedRow(), 2), tblListadoMotos.getSelectedRow(), 2);
+            modelo.setValueAt(false, tblListadoMotos.getSelectedRow(), 4);
+            modelo.setValueAt(false, tblListadoMotos.getSelectedRow(), 6);
+            tblListadoMotos.setSelectionForeground(Color.RED);
+        } else {
+            try {
+                if (validarCamposConfiguracionVehiculo()) {
+                    String capacidad = "" + jspCapacidadVehiculo.getValue();
+                    if (itemCamioneta.compareToIgnoreCase("camioneta") == 0 && (Short.parseShort(capacidad) > 0)) {
+                        Camioneta camioneta = new Camioneta((new TipoVehiculo("Camioneta", (byte) 1)), (short) jspCapacidadVehiculo.getValue(),
+                                txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                                Double.parseDouble(txtValorAlquiler.getText()));
+
+                        //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
+                        for (int i = 0; i < tblListadosCamionetas.getRowCount(); i++) {
+                            Camioneta camionetaTabla = obtenerObjetoTablaCamionetas(i);
+                            if (camioneta.getMatricula().equals(camionetaTabla.getMatricula())) {
+
+                                DefaultTableModel modelo = (DefaultTableModel) tblListadosCamionetas.getModel();
+                                modelo.setValueAt("Inhabilitado " + modelo.getValueAt(i, 2), i, 2);
+                                modelo.setValueAt(false, i, 4);
+                                modelo.setValueAt(false, i, 6);
+                                tblListadosCamionetas.setSelectionForeground(Color.RED);
+                                JOptionPane.showMessageDialog(this, "Camioneta desactivada", "Dat", 0);
+                                break;
+                            }
+                        }
+
+                    } //Validacion para el tipo carro  ---------------------------------------------------------------
+                    else if (itemCarro.compareToIgnoreCase("carro") == 0) {
+
+                        Carro carro = new Carro((new TipoVehiculo("Carro", (byte) 2)), chbExtras.isSelected(),
+                                txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                                Double.parseDouble(txtValorAlquiler.getText()));
+
+                        //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
+                        for (int i = 0; i < tblListadoCarros.getRowCount(); i++) {
+
+                            Carro carroTabla = obtenerObjetoTablaCarro(i);
+                            if (carro.getMatricula().equals(carroTabla.getMatricula())) {
+
+                                DefaultTableModel modelo = (DefaultTableModel) tblListadoCarros.getModel();
+                                modelo.setValueAt("Inhabilitado " + modelo.getValueAt(i, 2), i, 2);
+                                modelo.setValueAt(false, i, 4);
+                                modelo.setValueAt(false, i, 6);
+                                tblListadoCarros.setSelectionForeground(Color.RED);
+                                JOptionPane.showMessageDialog(this, "Carro desactivado", "Dat", 0);
+                                break;
+                            }
+                        }
+
+                    } //------------------------------------validacion para tipo Moto
+                    else if (itemMoto.compareToIgnoreCase("moto") == 0) {
+
+                        Moto moto = new Moto((new TipoVehiculo("Moto", (byte) 3)), chbCasco.isSelected(),
+                                txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                                Double.parseDouble(txtValorAlquiler.getText()));
+
+                        //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
+                        for (int i = 0; i < tblListadoMotos.getRowCount(); i++) {
+
+                            Moto motoTabla = obtenerObjetoTablaMoto(i);
+                            if (moto.getMatricula().equals(motoTabla.getMatricula())) {
+
+                                DefaultTableModel modelo = (DefaultTableModel) tblListadoMotos.getModel();
+                                modelo.setValueAt("Inhabilitado " + modelo.getValueAt(i, 2), i, 2);
+                                modelo.setValueAt(false, i, 4);
+                                modelo.setValueAt(false, i, 6);
+                                tblListadoMotos.setSelectionForeground(Color.RED);
+                                JOptionPane.showMessageDialog(this, "Moto desactivada", "Dat", 0);
+                                break;
+                            }
+
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Debe diligenciar tipo Y/O Capacidad, casco, Eztra",
+                                "Datos Faltantes", 0);
+                    }
+                    limpiarCamposConfiguracion();
+
+                }
+            } catch (VehiculosException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos Erroneos", 0);
+            }
+        }
+
+        limpiarCamposConfiguracion();
+
+
+    }//GEN-LAST:event_btnDesactivarActionPerformed
+
+
+    private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
+
+        String itemCamioneta = "" + jcbTipoVehiculo.getSelectedItem();
+        String itemCarro = "" + jcbTipoVehiculo.getSelectedItem();
+        String itemMoto = "" + jcbTipoVehiculo.getSelectedItem();
+
+        if (tblListadosCamionetas.getSelectedRow() != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) tblListadosCamionetas.getModel();
+            //Divido la cadena de inhabilitado+placa en dos partes para extraer solo la placa
+            try {
+                String[] datos = modelo.getValueAt(tblListadosCamionetas.getSelectedRow(), 2).toString().split(" ");
+                modelo.setValueAt(datos[1], tblListadosCamionetas.getSelectedRow(), 2);
+                modelo.setValueAt(true, tblListadosCamionetas.getSelectedRow(), 6);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(null, "El vehiculo seleccionado no esta desactivado");
+            }
+
+        } else if (tblListadoCarros.getSelectedRow() != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) tblListadoCarros.getModel();
+            //Divido la cadena de inhabilitado+placa en dos partes para extraer solo la placa
+            try {
+                String[] datos = modelo.getValueAt(tblListadoCarros.getSelectedRow(), 2).toString().split(" ");
+                modelo.setValueAt(datos[1], tblListadoCarros.getSelectedRow(), 2);
+                modelo.setValueAt(true, tblListadoCarros.getSelectedRow(), 6);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(null, "El vehiculo seleccionado no esta desactivado");
+            }
+
+        } else if (tblListadoMotos.getSelectedRow() != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) tblListadoMotos.getModel();
+            //Divido la cadena de inhabilitado+placa en dos partes para extraer solo la placa
+            try {
+                String[] datos = modelo.getValueAt(tblListadoMotos.getSelectedRow(), 2).toString().split(" ");
+                modelo.setValueAt(datos[1], tblListadoMotos.getSelectedRow(), 2);
+                modelo.setValueAt(true, tblListadoMotos.getSelectedRow(), 6);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(null, "El vehiculo seleccionado no esta desactivado");
+            }
+        } else {
+            try {
+                if (validarCamposConfiguracionVehiculo()) {
+                    String capacidad = "" + jspCapacidadVehiculo.getValue();
+                    if (itemCamioneta.compareToIgnoreCase("camioneta") == 0 && (Short.parseShort(capacidad) > 0)) {
+                        Camioneta camioneta = new Camioneta((new TipoVehiculo("Camioneta", (byte) 1)), (short) jspCapacidadVehiculo.getValue(),
+                                txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                                Double.parseDouble(txtValorAlquiler.getText()));
+
+                        //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
+                        for (int i = 0; i < tblListadosCamionetas.getRowCount(); i++) {
+                            Camioneta camionetaTabla = obtenerObjetoTablaCamionetas(i);
+                           
+                                if (camionetaTabla.getMatricula().compareTo("Inhabilitado " + camioneta.getMatricula()) == 0) {
+
+                                    DefaultTableModel modelo = (DefaultTableModel) tblListadosCamionetas.getModel();
+                                    String[] datos = modelo.getValueAt(i, 2).toString().split(" ");
+                                    modelo.setValueAt(datos[1], i, 2);
+                                    modelo.setValueAt(true, i, 6);
+                                    JOptionPane.showMessageDialog(this, "Camioneta Activada", "Dat", 0);
+                                    break;
+                                }
+                        }
+
+                    } //Validacion para el tipo carro  ---------------------------------------------------------------
+                    else if (itemCarro.compareToIgnoreCase("carro") == 0) {
+
+                        Carro carro = new Carro((new TipoVehiculo("Carro", (byte) 2)), chbExtras.isSelected(),
+                                txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                                Double.parseDouble(txtValorAlquiler.getText()));
+
+                        //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
+                        for (int i = 0; i < tblListadoCarros.getRowCount(); i++) {
+
+                            Carro carroTabla = obtenerObjetoTablaCarro(i);
+                            if (carroTabla.getMatricula().compareTo("Ihabilitado " + carro.getMatricula()) == 0) {
+
+                                DefaultTableModel modelo = (DefaultTableModel) tblListadoCarros.getModel();
+                                String[] datos = modelo.getValueAt(i, 2).toString().split(" ");
+                                modelo.setValueAt(datos[1], i, 2);
+                                modelo.setValueAt(true, i, 6);
+                                JOptionPane.showMessageDialog(this, "Carro Activado", "Dat", 0);
+                                break;
+                            }
+                        }
+
+                    } //------------------------------------validacion para tipo Moto
+                    else if (itemMoto.compareToIgnoreCase("moto") == 0) {
+
+                        Moto moto = new Moto((new TipoVehiculo("Moto", (byte) 3)), chbCasco.isSelected(),
+                                txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
+                                Double.parseDouble(txtValorAlquiler.getText()));
+
+                        //For para recorrer todas las filas de la tabla y avaluar cual coincide con elvehiculo ingresado
+                        for (int i = 0; i < tblListadoMotos.getRowCount(); i++) {
+
+                            Moto motoTabla = obtenerObjetoTablaMoto(i);
+                            if (motoTabla.getMatricula().compareTo("Ihabilitado " + moto.getMatricula()) == 0) {
+
+                                DefaultTableModel modelo = (DefaultTableModel) tblListadoMotos.getModel();
+                                String[] datos = modelo.getValueAt(i, 2).toString().split(" ");
+                                modelo.setValueAt(datos[1], i, 2);
+                                modelo.setValueAt(true, i, 6);
+                                JOptionPane.showMessageDialog(this, "Moto Activada", "Dat", 0);
+                                break;
+                            }
+
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Debe diligenciar tipo Y/O Capacidad, casco, Eztra",
+                                "Datos Faltantes", 0);
+                    }
+                    limpiarCamposConfiguracion();
+
+                }
+            } catch (VehiculosException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos Erroneos", 0);
+            }
+            
+        }
+
+        limpiarCamposConfiguracion();
+
+
+    }//GEN-LAST:event_btnActivarActionPerformed
+
+    public Camioneta obtenerObjetoTablaCamionetas(int numeroFila) {
+        Object[] fila = new Object[6];
+        for (int i = 0; i < 6; i++) {//              
+            fila[i] = tblListadosCamionetas.getValueAt(numeroFila, i);
+        }
         Camioneta camioneta = new Camioneta((new TipoVehiculo("Camioneta", (byte) 1)),
                 Short.parseShort("" + fila[1]), "" + fila[2], Integer.parseInt("" + fila[3]),
                 Boolean.parseBoolean("" + fila[4]),
                 Double.parseDouble("" + fila[5]));
-
         return camioneta;
-
     }
 
     private Carro obtenerObjetoTablaCarro(int numeroFila) {
         Object[] fila = new Object[6];
-
-        for (int i = 0; i < 6; i++) {
-//              
+        for (int i = 0; i < 6; i++) {//              
             fila[i] = tblListadoCarros.getValueAt(numeroFila, i);
-
         }
-
         Carro carro = new Carro((new TipoVehiculo("Carro", (byte) 2)),
                 Boolean.parseBoolean("" + fila[1]), "" + fila[2], Integer.parseInt("" + fila[3]),
                 Boolean.parseBoolean("" + fila[4]),
                 Double.parseDouble("" + fila[5]));
-
         return carro;
-
     }
 
     private Moto obtenerObjetoTablaMoto(int numeroFila) {
         Object[] fila = new Object[6];
-
-        for (int i = 0; i < 6; i++) {
-//              
+        for (int i = 0; i < 6; i++) {//              
             fila[i] = tblListadoMotos.getValueAt(numeroFila, i);
-
         }
-
         Moto moto = new Moto((new TipoVehiculo("Moto", (byte) 2)),
                 Boolean.parseBoolean("" + fila[1]), "" + fila[2], Integer.parseInt("" + fila[3]),
                 Boolean.parseBoolean("" + fila[4]),
                 Double.parseDouble("" + fila[5]));
-
         return moto;
-
     }
+//Validar si hay una camioneta con la misma placa en la lista
 
-    private boolean validarCamioneta(Camioneta camioneta)  {
+    private boolean validarCamioneta(Camioneta camioneta) {
         for (int i = 0; i < tblListadosCamionetas.getRowCount(); i++) {
             Camioneta camionetaTabla = obtenerObjetoTablaCamionetas(i);
             if (camioneta.getMatricula().compareTo(camionetaTabla.getMatricula()) == 0) {
-                return true;
+                try {
+                    llamarExcepcionMatriculasIguales(1);
+                    return true;
+                } catch (VehiculosException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 0);
+                }
             }
         }
-        
-        
         return false;
     }
 
@@ -880,6 +1305,11 @@ public class MdiVehiculos extends javax.swing.JFrame {
         for (int i = 0; i < tblListadoCarros.getRowCount(); i++) {
             Carro carroTabla = obtenerObjetoTablaCarro(i);
             if (carro.getMatricula().compareTo(carroTabla.getMatricula()) == 0) {
+                try {
+                    llamarExcepcionMatriculasIguales(2);
+                } catch (VehiculosException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 0);
+                }
                 return true;
             }
         }
@@ -890,7 +1320,69 @@ public class MdiVehiculos extends javax.swing.JFrame {
         for (int i = 0; i < tblListadoMotos.getRowCount(); i++) {
             Moto motoTabla = obtenerObjetoTablaMoto(i);
             if (moto.getMatricula().compareTo(motoTabla.getMatricula()) == 0) {
-                return true;
+                try {
+                    llamarExcepcionMatriculasIguales(3);
+                    return true;
+                } catch (VehiculosException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 0);
+                }
+
+            }
+        }
+        return false;
+    }
+
+    private void llamarExcepcionMatriculasIguales(int x) throws VehiculosException {
+
+        if (x == 1) {
+            throw new VehiculosException("La matricula de la camioneta  se encuentra registrada");
+        } else if (x == 2) {
+            throw new VehiculosException("La matricula del Carro  se encuentra registrada");
+        } else if (x == 3) {
+            throw new VehiculosException("La matricula de la moto se encuentra registrada");
+        }
+    }
+
+    private boolean buscarCamioneta(Camioneta camioneta) {
+        for (int i = 0; i < tblListadosCamionetas.getRowCount(); i++) {
+            Camioneta camionetaTabla = obtenerObjetoTablaCamionetas(i);
+            if (camioneta.getMatricula().compareTo(camionetaTabla.getMatricula()) == 0) {
+                tblListadosCamionetas.changeSelection(i, 2, false, false);
+                JOptionPane.showMessageDialog(this, "Vehiculo encontrado", "Resultado", 2);
+                if (true) {
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
+    }
+
+    private boolean buscarCarro(Carro carro) {
+        for (int i = 0; i < tblListadoCarros.getRowCount(); i++) {
+            Carro carroTabla = obtenerObjetoTablaCarro(i);
+            if (carro.getMatricula().compareTo(carroTabla.getMatricula()) == 0) {
+                tblListadoCarros.changeSelection(i, 2, false, false);
+                JOptionPane.showMessageDialog(this, "Vehiculo encontrado", "Resultado", 2);
+                if (true) {
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
+    }
+
+    private boolean buscarMoto(Moto moto) {
+        for (int i = 0; i < tblListadoMotos.getRowCount(); i++) {
+            Moto motoTabla = obtenerObjetoTablaMoto(i);
+            if (moto.getMatricula().compareTo(motoTabla.getMatricula()) == 0) {
+                tblListadoMotos.changeSelection(i, 2, false, false);
+                JOptionPane.showMessageDialog(this, "Vehiculo encontrado", "Resultado", 2);
+                if (true) {
+                    return true;
+                }
+                break;
             }
         }
         return false;
@@ -898,6 +1390,9 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     private void iniciarMenus(boolean estado) {
 
+        tblListadosCamionetas.setEnabled(estado);
+        tblListadoCarros.setEnabled(estado);
+        tblListadoMotos.setEnabled(estado);
         mnuAlquilarVehiculos.setVisible(estado);
         mnuCargarVehiculos.setVisible(estado);
         mnuConfiguracionUsuario.setVisible(estado);
@@ -947,7 +1442,10 @@ public class MdiVehiculos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActivar;
     private javax.swing.JButton btnAgregarVehiculo;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnDesactivar;
     private javax.swing.JButton btnEliminarVehiculo;
     private javax.swing.JButton btnGuardarConfiguracionVehiculo;
     private javax.swing.JButton btnIngresar;
