@@ -7,6 +7,23 @@ import javax.swing.JOptionPane;
 import modelo.*;
 
 public class EscribirArchivoPlano {
+    
+       public static void escribir(Usuario usuario) {
+
+        File archivo = new File("src/Listado de usuarios.txt");
+        try {
+            PrintWriter salida = new PrintWriter(new FileWriter(archivo, true));
+//            salida.println("");
+            salida.println(usuario.obtenerArregloObjeto()[0] + ";"
+                    + usuario.obtenerArregloObjeto()[1] + ";2;" + usuario.obtenerArregloObjeto()[3] + ";"
+                    + usuario.obtenerArregloObjeto()[4] + ";" + usuario.obtenerArregloObjeto()[5]);
+            salida.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
 
     public static void escribir(Camioneta camioneta) {
 

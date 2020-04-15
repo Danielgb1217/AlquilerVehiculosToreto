@@ -76,10 +76,8 @@ public class Camioneta extends AbstractVehiculo implements Serializable {
     public Object[] obtenerArregloObjeto(){
         
         Object[] data = { getTipoVehiculo().getTipoVehiculo(), getCapacidad(), getMatricula(), getKm(), isEstado(), getValorAlquiler()  };
-        return data;
-            
-        
-        
+        return data;          
+    
     }
 
     @Override

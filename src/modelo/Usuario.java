@@ -71,7 +71,12 @@ public class Usuario extends Tercero implements Serializable {
         this.tipoUsuario = tipoUsuario;
     }
 
-
+  public Object[] obtenerArregloObjeto(){
+        
+        Object[] data = { getLogin(), getPasswd(), getTipoUsuario(), getNombre(), getApellido(), getCedula()  };
+        return data;          
+    
+    }
 
  
 

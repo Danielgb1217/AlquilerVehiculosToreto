@@ -67,7 +67,7 @@ public class GestionUsuario {
         if (matcher.matches()) {
             return matcher.matches();
         } else {
-            throw new UsuarioException("Los datos de ingreso estan erroneos");
+            throw new UsuarioException("El correo electronico no es valido");
         }
 
     }
