@@ -9,26 +9,22 @@ import vista.MdiVehiculos;
 
 public class GestionVehiculo implements Serializable {
 
-    private MdiVehiculos mdiVehiculos;
-    private List<Camioneta> lstCamionetas;
-    private List<Carro> lstCarros;
-    private List<Moto> lstMotos;
+    private List<AbstractVehiculo> lstVehiculos;
+
     private TipoVehiculo[] tipoVehiculo;
 
     public GestionVehiculo() {
 
         llenarTipoVehiculo();
-        llenarVehiculos();
-
+//       llenarVehiculos();
+       
     }
 
     public void llenarVehiculos() {
+        
+        
+        lstVehiculos = LeerArchivoPlano.cargarVehiculos(tipoVehiculo);
 
-        //if (lstCamionetas.isEmpty() || lstCarros.isEmpty() || lstMotos.isEmpty()) {//para que no borre la lista cuando llame n
-        lstCamionetas = LeerArchivoPlano.cargarCamionetas(tipoVehiculo);
-        lstCarros = LeerArchivoPlano.cargarCarros(tipoVehiculo);
-        lstMotos = LeerArchivoPlano.cargarMotos(tipoVehiculo);
-        // }
     }
 
     public void registrarVehiculo(AbstractVehiculo vehiculo) {
@@ -42,28 +38,12 @@ public class GestionVehiculo implements Serializable {
         tipoVehiculo[2] = new TipoVehiculo("Moto", (byte) 3);
     }
 
-    public List<Camioneta> getLstCamionetas() {
-        return lstCamionetas;
+    public List<AbstractVehiculo> getLstVehiculos() {
+        return lstVehiculos;
     }
 
-    public void setLstCamionetas(List<Camioneta> lstCamionetas) {
-        this.lstCamionetas = lstCamionetas;
-    }
-
-    public List<Carro> getLstCarros() {
-        return lstCarros;
-    }
-
-    public void setLstCarros(List<Carro> lstCarros) {
-        this.lstCarros = lstCarros;
-    }
-
-    public List<Moto> getLstMotos() {
-        return lstMotos;
-    }
-
-    public void setLstMotos(List<Moto> lstMotos) {
-        this.lstMotos = lstMotos;
+    public void setLstVehiculos(List<AbstractVehiculo> lstVehiculos) {
+        this.lstVehiculos = lstVehiculos;
     }
 
     public TipoVehiculo[] getTipoVehiculo() {
@@ -77,7 +57,7 @@ public class GestionVehiculo implements Serializable {
     //-------------------------------Validacion  Placa vehiculo 
     //Expresion regular para validar matriculas de carros y motos con el formato
     //XXX###    XXX33X
-    public  boolean validarMatricula(String matricula) {
+    public boolean validarMatricula(String matricula) {
         Pattern pattern = Pattern.compile("[a-zA-Z]{3}[0-9]{3}|[a-zA-Z]{3}[0-9]{2}[a-zA-Z]");
         Matcher matcher = pattern.matcher(matricula);
         return matcher.matches();

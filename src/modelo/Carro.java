@@ -10,7 +10,7 @@ public class Carro extends AbstractVehiculo implements Serializable{
     private TipoVehiculo tipoVehiculo;
 
     public Carro(TipoVehiculo tipoVehiculo, boolean extras, String matricula, int km, boolean estado, double valorAlquiler) {
-        super(matricula, km, estado, valorAlquiler);
+        super(tipoVehiculo,matricula, km, estado, valorAlquiler);
         this.extras = extras;
         this.tipoVehiculo = tipoVehiculo;
     }

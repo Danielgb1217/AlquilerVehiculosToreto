@@ -11,7 +11,7 @@ public class Camioneta extends AbstractVehiculo implements Serializable {
     private TipoVehiculo tipoVehiculo;
 
     public Camioneta(TipoVehiculo tipoVehiculo, short capacidad, String matricula, int km, boolean estado, double valorAlquiler) {
-        super(matricula, km, estado, valorAlquiler);
+        super(tipoVehiculo, matricula, km, estado, valorAlquiler);
         this.capacidad = capacidad;
         this.tipoVehiculo = tipoVehiculo;
     }

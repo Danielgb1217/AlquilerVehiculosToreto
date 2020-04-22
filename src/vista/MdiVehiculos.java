@@ -5,7 +5,9 @@ import Excepciones.VehiculosException;
 import controlador.*;
 import java.awt.Color;
 import java.beans.PropertyVetoException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.*;
 import javafx.scene.control.PasswordField;
 import javax.swing.JOptionPane;
@@ -198,7 +200,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         desktopPane.add(jifLogin);
@@ -831,7 +833,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         );
 
         desktopPane.add(jifRegistrarAlquilerVehiculo);
-        jifRegistrarAlquilerVehiculo.setBounds(180, 440, 1054, 581);
+        jifRegistrarAlquilerVehiculo.setBounds(180, 440, 1054, 577);
         try {
             jifRegistrarAlquilerVehiculo.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -981,41 +983,37 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnuCerrarSesionActionPerformed
 
-    private void pintarLstCamionetas() {
+    private void pintarLstVehiculos() {
 
-        modeloTblCamionetas.getDataVector().removeAllElements();
-        for (Camioneta camioneta : gestionVehiculo.getLstCamionetas()) {
-
-            modeloTblCamionetas.addRow(camioneta.obtenerArregloObjeto());
-        }
-        tblListadosCamionetas.setModel(modeloTblCamionetas);
-    }
-
-    private void pintarLstCarros() {
-
+        modeloTblCamionetas.getDataVector().removeAllElements();//
         modeloTblCarros.getDataVector().removeAllElements();
-        for (Carro carro : gestionVehiculo.getLstCarros()) {
-
-            modeloTblCarros.addRow(carro.obtenerArregloObjeto());
-        }
-        tblListadoCarros.setModel(modeloTblCarros);
-    }
-
-    private void pintarLstMotos() {
-
         modeloTblMotos.getDataVector().removeAllElements();
-        for (Moto moto : gestionVehiculo.getLstMotos()) {
+//        for (int i = 0; i < gestionVehiculo.getLstVehiculos().size(); i++) {
+//            gestionVehiculo.getLstVehiculos().remove(i);//
+//        }
+        for (AbstractVehiculo vehiculo : gestionVehiculo.getLstVehiculos()) {
+            if (vehiculo.getTipoVehiculo().getCodigo() == (byte) 1) {
+                //COn Instace of puedo saber si un objeto es instancia de alguna clase EJ...
+                //vehiculo instanceof Camioneta
+                modeloTblCamionetas.addRow(vehiculo.obtenerArregloObjeto());
 
-            modeloTblMotos.addRow(moto.obtenerArregloObjeto());
+            } else if (vehiculo.getTipoVehiculo().getCodigo() == (byte) 2) {
+
+                modeloTblCarros.addRow(vehiculo.obtenerArregloObjeto());
+            } else if (vehiculo.getTipoVehiculo().getCodigo() == (byte) 3) {
+                modeloTblMotos.addRow(vehiculo.obtenerArregloObjeto());
+            }
         }
+
+        tblListadosCamionetas.setModel(modeloTblCamionetas);
+        tblListadoCarros.setModel(modeloTblCarros);
         tblListadoMotos.setModel(modeloTblMotos);
     }
 
     private void iniciarTablas() {
+
         gestionVehiculo.llenarVehiculos();
-        pintarLstCarros();
-        pintarLstCamionetas();
-        pintarLstMotos();
+        pintarLstVehiculos();
         verificarCamionetasInactivos();
         verificarCarrosInactivos();
         verificarMotosInactivos();
@@ -1025,6 +1023,9 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
         iniciarTablas();
         jifListadoVehiculos.show();
+        tblListadosCamionetas.clearSelection();
+        tblListadoCarros.clearSelection();
+        tblListadoMotos.clearSelection();
         if (jifListadoVehiculos.isIcon()) {   //SI esta minimizada al presiona en el menu se maximiza
             try {
                 jifListadoVehiculos.setMaximum(true);
@@ -1093,6 +1094,9 @@ public class MdiVehiculos extends javax.swing.JFrame {
         txtKm.setText("");
         chbDisponibilidad.setSelected(false);
         txtValorAlquiler.setText("");
+        tblListadosCamionetas.clearSelection();
+        tblListadoCarros.clearSelection();
+        tblListadoMotos.clearSelection();
 
     }
 
@@ -1159,10 +1163,14 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
         if (tblListadosCamionetas.getSelectedRow() != -1) {
             modeloTblCamionetas.removeRow(tblListadosCamionetas.getSelectedRow());
+            tblListadosCamionetas.clearSelection();
+
         } else if (tblListadoCarros.getSelectedRow() != -1) {
             modeloTblCarros.removeRow(tblListadoCarros.getSelectedRow());
+            tblListadoCarros.clearSelection();
         } else if (tblListadoMotos.getSelectedRow() != -1) {
             modeloTblMotos.removeRow(tblListadoMotos.getSelectedRow());
+            tblListadoMotos.clearSelection();
         } else {
             try {
                 if (validarCamposConfiguracionVehiculo()) {
@@ -1346,6 +1354,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
             modeloTblCamionetas.setValueAt(false, tblListadosCamionetas.getSelectedRow(), 4);
             modeloTblCamionetas.setValueAt(false, tblListadosCamionetas.getSelectedRow(), 6);
             tblListadosCamionetas.setSelectionForeground(Color.RED);
+            tblListadosCamionetas.clearSelection();
 
         } else if (tblListadoCarros.getSelectedRow() != -1) {
 
@@ -1353,6 +1362,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
             modeloTblCarros.setValueAt(false, tblListadoCarros.getSelectedRow(), 4);
             modeloTblCarros.setValueAt(false, tblListadoCarros.getSelectedRow(), 6);
             tblListadoCarros.setSelectionForeground(Color.RED);
+            tblListadoCarros.clearSelection();
 
         } else if (tblListadoMotos.getSelectedRow() != -1) {
 
@@ -1360,6 +1370,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
             modeloTblMotos.setValueAt(false, tblListadoMotos.getSelectedRow(), 4);
             modeloTblMotos.setValueAt(false, tblListadoMotos.getSelectedRow(), 6);
             tblListadoMotos.setSelectionForeground(Color.RED);
+            tblListadoMotos.clearSelection();
         } else {
             try {
                 if (validarCamposConfiguracionVehiculo()) {
@@ -1459,6 +1470,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 String[] datos = modeloTblCamionetas.getValueAt(tblListadosCamionetas.getSelectedRow(), 2).toString().split(" ");
                 modeloTblCamionetas.setValueAt(datos[1], tblListadosCamionetas.getSelectedRow(), 2);
                 modeloTblCamionetas.setValueAt(true, tblListadosCamionetas.getSelectedRow(), 6);
+                tblListadosCamionetas.clearSelection();
             } catch (ArrayIndexOutOfBoundsException e) {
                 JOptionPane.showMessageDialog(null, "El vehiculo seleccionado no esta desactivado");
             }
@@ -1470,6 +1482,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 String[] datos = modeloTblCarros.getValueAt(tblListadoCarros.getSelectedRow(), 2).toString().split(" ");
                 modeloTblCarros.setValueAt(datos[1], tblListadoCarros.getSelectedRow(), 2);
                 modeloTblCarros.setValueAt(true, tblListadoCarros.getSelectedRow(), 6);
+                tblListadoCarros.clearSelection();
             } catch (ArrayIndexOutOfBoundsException e) {
                 JOptionPane.showMessageDialog(null, "El vehiculo seleccionado no esta desactivado");
             }
@@ -1481,6 +1494,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 String[] datos = modeloTblMotos.getValueAt(tblListadoMotos.getSelectedRow(), 2).toString().split(" ");
                 modeloTblMotos.setValueAt(datos[1], tblListadoMotos.getSelectedRow(), 2);
                 modeloTblMotos.setValueAt(true, tblListadoMotos.getSelectedRow(), 6);
+                tblListadoMotos.clearSelection();
             } catch (ArrayIndexOutOfBoundsException e) {
                 JOptionPane.showMessageDialog(null, "El vehiculo seleccionado no esta desactivado");
             }
@@ -1584,8 +1598,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
 
-
-
         Usuario usuario = new Usuario(txtRegistrarCorreo.getText(), txtRegistarPassword.getText(),
                 new TipoUsuario((byte) 2, "UsuarioGeneral"), txtRegistrarNombre.getText(),
                 txtRegistrarApellido.getText(), txtRegistrarCedula.getText());
@@ -1602,7 +1614,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
 
         jifRegistrarUsuario.setVisible(true);
-         txtRegistarPassword.setVisible(true);
+        txtRegistarPassword.setVisible(true);
         txtRegistrarNombre.setVisible(true);
         txtRegistrarApellido.setVisible(true);
         txtRegistrarCedula.setVisible(true);
@@ -1612,42 +1624,61 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     private void mnuAlquilarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAlquilarVehiculosActionPerformed
 
+        modeloAlquilerVehiculo.getDataVector().removeAllElements();//Limpia la tabla para que no se duplique informacion
         jifAlquilarVehiculo.setVisible(true);
         iniciarTablas();
 
+        Object filaCamionetas[] = new Object[modeloTblCamionetas.getColumnCount() + 1];
+        Object filaCarros[] = new Object[modeloTblCarros.getColumnCount() + 1];
+        Object filaMotos[] = new Object[modeloTblMotos.getColumnCount() + 1];
+
         for (int i = 0; i < modeloTblCamionetas.getRowCount(); i++) {
-            Object fila[] = new Object[modeloTblCamionetas.getColumnCount()];
-            for (int j = 0; j < modeloTblCamionetas.getColumnCount(); j++) {
-                fila[j] = modeloTblCamionetas.getValueAt(i, j);
+            if ((boolean) modeloTblCamionetas.getValueAt(i, 4)) {
+
+                for (int j = 0; j < modeloTblCamionetas.getColumnCount(); j++) {
+                    filaCamionetas[j] = modeloTblCamionetas.getValueAt(i, j);
+                }
+                filaCamionetas[7] = false;
+                modeloAlquilerVehiculo.addRow(filaCamionetas);
             }
-            modeloAlquilerVehiculo.addRow(fila);
         }
         for (int i = 0; i < modeloTblCarros.getRowCount(); i++) {
-            Object fila[] = new Object[modeloTblCarros.getColumnCount()];
-            for (int j = 0; j < modeloTblCarros.getColumnCount(); j++) {
-                fila[j] = modeloTblCarros.getValueAt(i, j);
+            if ((boolean) modeloTblCarros.getValueAt(i, 4)) {
+                for (int j = 0; j < modeloTblCarros.getColumnCount(); j++) {
+                    filaCarros[j] = modeloTblCarros.getValueAt(i, j);
+                }
+                filaCarros[7] = false;
+                modeloAlquilerVehiculo.addRow(filaCarros);
             }
-            modeloAlquilerVehiculo.addRow(fila);
         }
         for (int i = 0; i < modeloTblMotos.getRowCount(); i++) {
-            Object fila[] = new Object[modeloTblMotos.getColumnCount()];
-            for (int j = 0; j < modeloTblMotos.getColumnCount(); j++) {
-                fila[j] = modeloTblMotos.getValueAt(i, j);
+            if ((boolean) modeloTblMotos.getValueAt(i, 4)) {
+                for (int j = 0; j < modeloTblMotos.getColumnCount(); j++) {
+                    filaMotos[j] = modeloTblMotos.getValueAt(i, j);
+                }
+                filaMotos[7] = false;
+                modeloAlquilerVehiculo.addRow(filaMotos);
             }
-            modeloAlquilerVehiculo.addRow(fila);
         }
-
+        tblAlquilarVehiculo.setModel(modeloAlquilerVehiculo);
 
     }//GEN-LAST:event_mnuAlquilarVehiculosActionPerformed
 
     private void btnAlquilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlquilarActionPerformed
 
-        if (tblAlquilarVehiculo.getSelectedRow() != -1) {
-            numeroFila = tblAlquilarVehiculo.getSelectedRow();
+        List<Integer> vehiculoAlquilar = new ArrayList<>();
+
+        for (int i = 0; i < modeloAlquilerVehiculo.getRowCount(); i++) {
+
+            if ((boolean) modeloAlquilerVehiculo.getValueAt(i, 7)) {
+//            numeroFila = tblAlquilarVehiculo.getSelectedRow();
+
+                vehiculoAlquilar.add(i);
+                System.out.println("i = " + vehiculoAlquilar);
+            }
+
         }
-
         jifRegistrarAlquilerVehiculo.setVisible(true);
-
     }//GEN-LAST:event_btnAlquilarActionPerformed
 
     private void alquilarVehiculo() {
