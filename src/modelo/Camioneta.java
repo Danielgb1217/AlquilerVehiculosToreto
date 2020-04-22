@@ -18,10 +18,8 @@ public class Camioneta extends AbstractVehiculo implements Serializable {
     
     
     
-    @Override
-    public double calcularAlquiler(int km) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+   
 
     public short getCapacidad() {
         return capacidad;
@@ -70,7 +68,6 @@ public class Camioneta extends AbstractVehiculo implements Serializable {
     public void setValorAlquiler(double valorAlquiler) {
         this.valorAlquiler = valorAlquiler;
     }
-
    
 //Metodo para conertir un objeto con sus atributos a un areglo de tipo objeto
     public Object[] obtenerArregloObjeto(){
@@ -86,6 +83,12 @@ public class Camioneta extends AbstractVehiculo implements Serializable {
     }
 
 
+
+    @Override
+    public double calcularAlquiler(int km) {
+
+    return 5000*(double)km;
+    }
     
     
 }

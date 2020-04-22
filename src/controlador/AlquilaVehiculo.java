@@ -37,10 +37,10 @@ public class AlquilaVehiculo implements Serializable{
         return   "vehiculo=" + vehiculo + ", usuario=" + usuario + '}';
     }
     
-    public void alquilarVehiculo(AbstractVehiculo vehiculo, Usuario usuario){
+    public double alquilarVehiculo(AbstractVehiculo vehiculo, Usuario usuario){
         
 
-        
+        return 10000;
         
     }
     

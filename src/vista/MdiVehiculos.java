@@ -21,12 +21,14 @@ import utilidades.*;
  */
 public class MdiVehiculos extends javax.swing.JFrame {
 
-    private static int numeroFila = 0;
+    private static List<Integer> vehiculoAlquilar;
+
     private AlquilaVehiculo alquilarVehiculo;
     private GestionUsuario gestionUsuario;
     private Usuario usuarioAutenticado;
     private GestionVehiculo gestionVehiculo;
     private AbstractVehiculo camioneta;
+    private AlquilaVehiculo alquilaVehiculo;
     DefaultTableModel modeloTblCamionetas;
     DefaultTableModel modeloTblCarros;
     DefaultTableModel modeloTblMotos;
@@ -35,10 +37,12 @@ public class MdiVehiculos extends javax.swing.JFrame {
     public MdiVehiculos() {
         initComponents();
         gestionUsuario = new GestionUsuario(); //Instancio el control que permite crear la lista llenar usuarios y cargar
+        alquilaVehiculo = new AlquilaVehiculo();    //Controlador para< alquilar vehiculos
         modeloTblCamionetas = (DefaultTableModel) tblListadosCamionetas.getModel();
         modeloTblCarros = (DefaultTableModel) tblListadoCarros.getModel();
         modeloTblMotos = (DefaultTableModel) tblListadoMotos.getModel();
         modeloAlquilerVehiculo = (DefaultTableModel) tblAlquilarVehiculo.getModel();
+        vehiculoAlquilar = new ArrayList<>();
     }
 
     @SuppressWarnings("unchecked")
@@ -1665,23 +1669,20 @@ public class MdiVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuAlquilarVehiculosActionPerformed
 
     private void btnAlquilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlquilarActionPerformed
-
-        List<Integer> vehiculoAlquilar = new ArrayList<>();
-
+        //guarda en una lista las filas en donde se presenta true en el campo de alquilar vehiculos 
+        vehiculoAlquilar.clear();
         for (int i = 0; i < modeloAlquilerVehiculo.getRowCount(); i++) {
 
             if ((boolean) modeloAlquilerVehiculo.getValueAt(i, 7)) {
 //            numeroFila = tblAlquilarVehiculo.getSelectedRow();
-
                 vehiculoAlquilar.add(i);
-                System.out.println("i = " + vehiculoAlquilar);
             }
-
         }
         jifRegistrarAlquilerVehiculo.setVisible(true);
+
     }//GEN-LAST:event_btnAlquilarActionPerformed
 
-    private void alquilarVehiculo() {
+    private void calcularValorTotalAlquiler(double costoAlquiler, int numeroFila) {
 
         Date fecha = jdFechaInicial.getDate();
         int diaAlquiler = fecha.getDay();
@@ -1694,7 +1695,13 @@ public class MdiVehiculos extends javax.swing.JFrame {
             diasAlquiler = 1;
         }
 
-        Double CostoAlquiler = diasAlquiler * (double) (modeloAlquilerVehiculo.getValueAt(numeroFila, 5)); //************
+//        for (Interger numeroFila : vehiculoAlquilar) {
+//
+//            gestionVehiculo.
+//            
+//        }
+
+        costoAlquiler = (double)diasAlquiler * costoAlquiler; 
         jpDatosAlquiler.setVisible(true);
         txtDetallesUsuarioAlquiler.setText(usuarioAutenticado.toString());
 
@@ -1702,32 +1709,62 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 + " de Placas " + modeloAlquilerVehiculo.getValueAt(numeroFila, 2) + " con un costo de "
                 + modeloAlquilerVehiculo.getValueAt(numeroFila, 5) + " Pesos por dia");
 
-        txtDetallesCostoAlquiler.setText(CostoAlquiler + "Pesos");
+        txtDetallesCostoAlquiler.setText(costoAlquiler + "Pesos");
         txtDetallesFechaEntrega.setText("" + fechaFinal);
 
     }
 
     private void bntConfirmarAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConfirmarAlquilerActionPerformed
 
-        JOptionPane.showMessageDialog(null, modeloAlquilerVehiculo.getValueAt(numeroFila, 2));
+        for (Integer numeroFila : vehiculoAlquilar) {
+            Usuario usuario = usuarioAutenticado;
+            double costoAlquiler = alquilaVehiculo.alquilarVehiculo(devolverVehiculoAlquilado(numeroFila), usuario);
+            calcularValorTotalAlquiler(costoAlquiler, numeroFila);
 
-        if (modeloAlquilerVehiculo.getValueAt(numeroFila, 0).toString().compareToIgnoreCase("camioneta") == 0) {
+            modeloTblCamionetas.setValueAt(false, numeroFila, 4);
+            modeloAlquilerVehiculo.setValueAt(false, numeroFila, 4);
 
-            AbstractVehiculo vehiculo = new Camioneta(new TipoVehiculo("Camioneta", (byte) 1),
+            
+        }
+
+    }//GEN-LAST:event_bntConfirmarAlquilerActionPerformed
+
+    public AbstractVehiculo devolverVehiculoAlquilado(int numeroFila) {
+
+        if (modeloAlquilerVehiculo.getValueAt(numeroFila, 0).toString().compareToIgnoreCase("Camioneta") == 0) {
+
+            AbstractVehiculo camioneta = new Camioneta(new TipoVehiculo("Camioneta", (byte) 1),
                     (short) modeloAlquilerVehiculo.getValueAt(numeroFila, 1),
                     modeloAlquilerVehiculo.getValueAt(numeroFila, 2).toString(),
                     (int) modeloAlquilerVehiculo.getValueAt(numeroFila, 3),
                     (boolean) modeloAlquilerVehiculo.getValueAt(numeroFila, 4),
                     (double) modeloAlquilerVehiculo.getValueAt(numeroFila, 5));
+            return camioneta;
 
-            Usuario usuario = usuarioAutenticado;
-            modeloTblCamionetas.setValueAt(true, numeroFila, 4);
-            modeloAlquilerVehiculo.setValueAt(true, numeroFila, 4);
+        } else if (modeloAlquilerVehiculo.getValueAt(numeroFila, 0).toString().compareToIgnoreCase("Carro") == 0) {
+
+            AbstractVehiculo carro = new Carro(new TipoVehiculo("Carro", (byte) 1),
+                    (boolean) modeloAlquilerVehiculo.getValueAt(numeroFila, 1),
+                    modeloAlquilerVehiculo.getValueAt(numeroFila, 2).toString(),
+                    (int) modeloAlquilerVehiculo.getValueAt(numeroFila, 3),
+                    (boolean) modeloAlquilerVehiculo.getValueAt(numeroFila, 4),
+                    (double) modeloAlquilerVehiculo.getValueAt(numeroFila, 5));
+
+            return carro;
+
+        } else if (modeloAlquilerVehiculo.getValueAt(numeroFila, 0).toString().compareToIgnoreCase("Moto") == 0) {
+
+            AbstractVehiculo moto = new Moto(new TipoVehiculo("Moto", (byte) 1),
+                    (boolean) modeloAlquilerVehiculo.getValueAt(numeroFila, 1),
+                    modeloAlquilerVehiculo.getValueAt(numeroFila, 2).toString(),
+                    (int) modeloAlquilerVehiculo.getValueAt(numeroFila, 3),
+                    (boolean) modeloAlquilerVehiculo.getValueAt(numeroFila, 4),
+                    (double) modeloAlquilerVehiculo.getValueAt(numeroFila, 5));
+
+            return moto;
         }
-
-        alquilarVehiculo();
-
-    }//GEN-LAST:event_bntConfirmarAlquilerActionPerformed
+return null;
+    }
 
     public Camioneta obtenerObjetoTablaCamionetas(int numeroFila) {
         Object[] fila = new Object[6];
