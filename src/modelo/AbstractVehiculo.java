@@ -59,6 +59,8 @@ public abstract class AbstractVehiculo implements VehiculoAble {
         JOptionPane.showMessageDialog(null, "estoy en el padre");
         return null;
     }
+    
+
 
     @Override
     public String toString() {

@@ -9,7 +9,7 @@ import modelo.*;
 public class LeerArchivoPlano {
 
     private static List<AbstractVehiculo> listadoVehiculos = new ArrayList<>();
-    
+    private static List<InformeAlquiler> listadoInformeAlquiler = new ArrayList<>();
 
     public static List<Usuario> cargarUsuarios(TipoUsuario[] tipos) {
 
@@ -107,8 +107,61 @@ public class LeerArchivoPlano {
                 e2.printStackTrace();
             }
         }
-
+System.out.println("arregloInformeAlquiler = " + listadoVehiculos);
         return listadoVehiculos;
+        
+        
+
+    }
+    
+    
+      public static List<InformeAlquiler> cargarInformeAlquiler() {
+        
+        listadoInformeAlquiler.clear();   //CONDICION NECESARIA PARA QUE AL MOMENTO DE LLAMAR A LA LISTA DESDE EL MDI NO ME
+                                    //DUPLIQUE LOS VEHICULOS EN LAS TABLAS...PASA POR QUE NO ESTABA LIMPIANDO LA LISTA CADA
+                                    //QUE LA LLAMABA Y ME REPETIA LOS VEHICULOS CAUNDO LA LLAMABA VARIAS VECES 
+        //List<List<AbstractVehiculo>> listadoVehiculos = new ArrayList<List<AbstractVehiculo>>();//Listas anidadas
+        File archivo = null;    //Declara objeto de tipo archivo
+        FileReader fr = null;   //Objeto que permite leer archivos
+        BufferedReader br = null;   //Permite llevar los archivos a la memoria ram
+
+        try {
+            archivo = new File("src/Informe de Vehiculos.txt"); //Se ubica en una ruta relativa en la carpea del proyecto
+            fr = new FileReader(archivo);
+
+            br = new BufferedReader(fr);
+            String linea;
+            br.readLine();  //Lee la primer linea en blanco que contiene los encabezados del archivo    
+            while ((linea = br.readLine()) != null) {
+
+                String[] datos = linea.split(";");  //Permite partir una linea leida por el separador indicado(;) metodo string
+
+                //Es una camioneta codigo = 1 posicion 1 de la fila
+               
+InformeAlquiler informeAlquiler= new InformeAlquiler(datos[0], datos[1],
+        datos[2], datos[3], datos[4], datos[5]);
+//                  Object lista   = new Object {datos[0],datos[1],datos[2],datos[3],datos[4],datos[5]};
+                    listadoInformeAlquiler.add(informeAlquiler);
+//listadoInformeAlquiler.add(arregloInformeAlquiler);
+                
+
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+System.out.println("arregloInformeAlquiler = " + listadoInformeAlquiler);
+        return listadoInformeAlquiler;
         
 
     }

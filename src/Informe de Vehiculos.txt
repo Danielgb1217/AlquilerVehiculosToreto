@@ -1,0 +1,6 @@
+
+dan abs;Camioneta;KIL876;Sun Apr 26 18:44:37 COT 2020;Wed Apr 29 18:44:38 COT 2020;3
+dan abs;Camioneta;IUO908;Sun Apr 26 18:48:02 COT 2020;Thu Apr 30 18:48:04 COT 2020;4
+dan abs;Camioneta;QWA324;Sun Apr 26 18:48:02 COT 2020;Thu Apr 30 18:48:04 COT 2020;4
+dan abs;Camioneta;GHY657;Sun Apr 26 18:48:02 COT 2020;Thu Apr 30 18:48:04 COT 2020;4
+dan abs;Camioneta;CDE345;Sun Apr 26 18:48:02 COT 2020;Thu Apr 30 18:48:04 COT 2020;4

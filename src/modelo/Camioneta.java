@@ -14,8 +14,7 @@ public class Camioneta extends AbstractVehiculo implements Serializable {
         super(tipoVehiculo, matricula, km, estado, valorAlquiler);
         this.capacidad = capacidad;
         this.tipoVehiculo = tipoVehiculo;
-    }
-    
+    } 
     
     
     
@@ -85,9 +84,9 @@ public class Camioneta extends AbstractVehiculo implements Serializable {
 
 
     @Override
-    public double calcularAlquiler(int km) {
+    public double calcularAlquiler(int kmRecorridos) {
 
-    return 5000*(double)km;
+    return 5000*(double)kmRecorridos;
     }
     
     

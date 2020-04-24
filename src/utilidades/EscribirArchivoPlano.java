@@ -75,6 +75,23 @@ public class EscribirArchivoPlano {
             ex.printStackTrace();
         }
     }
+              
+               public static void escribirInformeAlquiler(Object[] informeAlquiler) {
+
+        File archivo = new File("src/Informe de Vehiculos.txt");
+        try {
+            PrintWriter salida = new PrintWriter(new FileWriter(archivo, true));
+            salida.println("");
+            salida.print(informeAlquiler[0] + ";"
+                    + informeAlquiler[1] + ";" + informeAlquiler[2] + ";"
+                    + informeAlquiler[3] + ";" + informeAlquiler[4]+ ";" + informeAlquiler[5]);
+            salida.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }         
+              
 
     //Elimina todo el archivo---------------------------------------------------------------------
     public static void borrarArchivo() {
@@ -84,6 +101,21 @@ public class EscribirArchivoPlano {
         try {
             //tener cuidado de que el fichero exista o se nos generará una excepción FileNotFoundException o IOException.
             bw = new BufferedWriter(new FileWriter("src/Listado de Vehiculos.txt"));
+            bw.write("");  //escribir una línea vacía. Para ello utilizamos el método .write(). Borra todo el contenido archivo
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(EscribirArchivoPlano.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+        public static void borrarArchivoInformeVehiculos() {
+
+//        abrir un stream de escritura sobre el fichero. Para ello necesitaremos de un FileWriter y un BufferedWriter.
+        BufferedWriter bw;
+        try {
+            //tener cuidado de que el fichero exista o se nos generará una excepción FileNotFoundException o IOException.
+            bw = new BufferedWriter(new FileWriter("src/Informe de Vehiculos.txt"));
             bw.write("");  //escribir una línea vacía. Para ello utilizamos el método .write(). Borra todo el contenido archivo
             bw.close();
         } catch (IOException ex) {
