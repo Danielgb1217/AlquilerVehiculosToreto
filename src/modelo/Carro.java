@@ -18,8 +18,9 @@ public class Carro extends AbstractVehiculo implements Serializable{
     
     
     @Override
-    public double calcularAlquiler(int km) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double calcularAlquiler(int kmRecorridos) {
+
+    return 2500*(double)kmRecorridos;
     }
 
     public boolean isExtras() {

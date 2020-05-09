@@ -10,6 +10,7 @@ public class InformeAlquiler {
     private Object fechaInicio;
     private Object fechaFinal;
     private Object costoAlquiler;
+    private Object diasAlquiler;
 
     public InformeAlquiler(Object usuario, Object vehiculo, Object Matricula, Object fechaInicio, Object fechaFinal, Object costoAlquiler) {
         this.usuario = usuario;
@@ -20,6 +21,26 @@ public class InformeAlquiler {
         this.costoAlquiler = costoAlquiler;
     }
 
+    public InformeAlquiler(Object vehiculo, Object Matricula, Object fechaInicio, Object fechaFinal, Object diasAlquiler) {
+
+        this.vehiculo = vehiculo;
+        this.Matricula = Matricula;
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
+        this.diasAlquiler = diasAlquiler;
+
+    }
+
+    public Object getDiasAlquiler() {
+        return diasAlquiler;
+    }
+
+    public void setDiasAlquiler(Object diasAlquiler) {
+        this.diasAlquiler = diasAlquiler;
+    }
+
+    
+    
     public Object getUsuario() {
         return usuario;
     }
@@ -68,14 +89,25 @@ public class InformeAlquiler {
         this.costoAlquiler = costoAlquiler;
     }
 
-   public Object[] obtenerArregloObjeto(){
-        
-        Object[] data = { getUsuario(), getVehiculo(), getMatricula(), getFechaInicio(), getFechaFinal(), getCostoAlquiler()  };
+    public Object[] obtenerArregloObjeto() {
+
+        Object[] data = {getUsuario(), getVehiculo(), getMatricula(), getFechaInicio(), getFechaFinal(), getCostoAlquiler()};
         return data;
-          
-                
+
+    }
+    
+        public Object[] obtenerArregloObjetoReporteDisponibilidad() {
+
+        Object[] data = { getVehiculo(), getMatricula(), getFechaInicio(), getFechaFinal(), getDiasAlquiler()};
+        return data;
+
     }
 
-   
+    @Override
+    public String toString() {
+        return vehiculo + ", Matricula=" + Matricula + ", fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal +  ", diasAlquiler=" + diasAlquiler ;
+    }
+    
+    
 
 }

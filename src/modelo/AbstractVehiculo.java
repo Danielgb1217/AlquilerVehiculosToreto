@@ -53,6 +53,30 @@ public abstract class AbstractVehiculo implements VehiculoAble {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
+
+    public int getKm() {
+        return km;
+    }
+
+    public void setKm(int km) {
+        this.km = km;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public double getValorAlquiler() {
+        return valorAlquiler;
+    }
+
+    public void setValorAlquiler(double valorAlquiler) {
+        this.valorAlquiler = valorAlquiler;
+    }
     
     
     public Object[] obtenerArregloObjeto(){

@@ -16,6 +16,7 @@ public class AlquilaVehiculo implements Serializable {
     private AbstractVehiculo vehiculo;
     private Usuario usuario;
     private List<InformeAlquiler> listadoInformeAlquiler;
+    private List<InformeAlquiler> reporteDisponibiidadVehculos;
 
     public AbstractVehiculo getVehiculo() {
         return vehiculo;
@@ -44,10 +45,25 @@ public class AlquilaVehiculo implements Serializable {
         return listadoInformeAlquiler;
     }
 
+        public void llenarReporteDisponibilidadVehiculos() {
+
+        reporteDisponibiidadVehculos = LeerArchivoPlano.cargarReporteDisponibilidad();
+        
+    }
+    
     public List<InformeAlquiler> getListadoInformeAlquiler() {
         return listadoInformeAlquiler;
     }
 
+    public List<InformeAlquiler> getReporteDisponibiidadVehculos() {
+        return reporteDisponibiidadVehculos;
+    }
+
+    public void setReporteDisponibiidadVehculos(List<InformeAlquiler> reporteDisponibiidadVehculos) {
+        this.reporteDisponibiidadVehculos = reporteDisponibiidadVehculos;
+    }
+
+    
     public void setListadoInformeAlquiler(List<InformeAlquiler> listadoInformeAlquiler) {
         this.listadoInformeAlquiler = listadoInformeAlquiler;
     }
@@ -56,12 +72,30 @@ public class AlquilaVehiculo implements Serializable {
 
         if (vehiculo instanceof Camioneta) {
 
-            double valorCapacidad =  ((Camioneta) vehiculo).getCapacidad()*5000;
-            double costoAlquiler = vehiculo.calcularAlquiler(kmRecorridos)+valorCapacidad;
+            double valorCapacidad = ((Camioneta) vehiculo).getCapacidad() * 5000;
+            double costoAlquiler = vehiculo.calcularAlquiler(kmRecorridos) + valorCapacidad;
+            return costoAlquiler;
+        } else if (vehiculo instanceof Carro) {
+            double costoAlquiler;
+            if (((Carro) vehiculo).isExtras()) {
+
+                costoAlquiler = vehiculo.calcularAlquiler(kmRecorridos) + 50000;
+            } else {
+                costoAlquiler = vehiculo.calcularAlquiler(kmRecorridos);
+            }
+            return costoAlquiler;
+        } else if (vehiculo instanceof Moto) {
+            double costoAlquiler;
+            if (((Moto) vehiculo).isCasco()) {
+
+                costoAlquiler = vehiculo.calcularAlquiler(kmRecorridos) + 10000;
+            } else {
+                costoAlquiler = vehiculo.calcularAlquiler(kmRecorridos);
+            }
             return costoAlquiler;
         }
-        
-return 0;
+
+        return 0;
     }
 
 }

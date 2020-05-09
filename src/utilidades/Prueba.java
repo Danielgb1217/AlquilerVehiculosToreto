@@ -3,6 +3,7 @@ package utilidades;
 //
 //import javax.swing.JOptionPane;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -25,6 +26,11 @@ public class Prueba {
 //    }
 //    
        public static void main(String[] args) {
+//           LocalDate fecha2 = LocalDate.of(2020, 6, 17);
+//           LocalDate fecha1 = LocalDate.of(2020, 5, 1);
+//           int x = fecha1.compareTo(fecha2);
+//                   System.out.println(x);
+//                   LocalDate fecha3=fecha1.getDayOfYear()
 //while(true){
 //     String x =JOptionPane.showInputDialog("Ingrese placa");
 //       
