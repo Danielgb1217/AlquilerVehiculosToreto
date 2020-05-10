@@ -46,6 +46,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private AlquilaVehiculo alquilaVehiculo;
     private static List<InformeAlquiler> reporteHorasAlquiler = new ArrayList<>();
     private Encriptacion encriptar;
+    private EnviarCorreo enviarCorreo;
 
     DefaultTableModel modeloTblCamionetas;
     DefaultTableModel modeloTblCarros;
@@ -57,7 +58,10 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     public MdiVehiculos() {
         initComponents();
+        
         encriptar = new Encriptacion();
+        enviarCorreo = new EnviarCorreo();
+                       
         gestionUsuario = new GestionUsuario(); //Instancio el control que permite crear la lista llenar usuarios y cargar
         alquilaVehiculo = new AlquilaVehiculo();    //Controlador para< alquilar vehiculos
         modeloTblCamionetas = (DefaultTableModel) tblListadosCamionetas.getModel();
@@ -2071,6 +2075,10 @@ public class MdiVehiculos extends javax.swing.JFrame {
             devolverVehiculoAlquilado(numeroFila).getKm()};
         JOptionPane.showMessageDialog(this, "Acaba de alquilar un vehiculo tipo " + informeAlquiler[1] + " de placas "
                 + informeAlquiler[2] + "", "Congratulations", 2);
+        
+        enviarCorreo.enviarCorreo("El usuario "+ usuarioAutenticado.toString()+" Acaba de alquilar un vehiculo tipo " + informeAlquiler[1] + " de placas "
+                + informeAlquiler[2]);
+        
         return informeAlquiler;
     }
 
@@ -2112,6 +2120,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
             modeloAlquilerVehiculo.setValueAt(false, numeroFila, 4);
             calcularDiasAlquiler(numeroFila);
+            
 
         }
         escribirArchivoPlanoTablasVehiculos();  //Actualiza el valor  de la tabla de alquilar quitando de la lista
