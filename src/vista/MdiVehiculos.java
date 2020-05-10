@@ -45,6 +45,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private AbstractVehiculo vehiculo;
     private AlquilaVehiculo alquilaVehiculo;
     private static List<InformeAlquiler> reporteHorasAlquiler = new ArrayList<>();
+    private Encriptacion encriptar;
 
     DefaultTableModel modeloTblCamionetas;
     DefaultTableModel modeloTblCarros;
@@ -56,6 +57,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     public MdiVehiculos() {
         initComponents();
+        encriptar = new Encriptacion();
         gestionUsuario = new GestionUsuario(); //Instancio el control que permite crear la lista llenar usuarios y cargar
         alquilaVehiculo = new AlquilaVehiculo();    //Controlador para< alquilar vehiculos
         modeloTblCamionetas = (DefaultTableModel) tblListadosCamionetas.getModel();
@@ -599,7 +601,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         );
 
         desktopPane.add(jifListadoVehiculos);
-        jifListadoVehiculos.setBounds(640, 0, 1162, 672);
+        jifListadoVehiculos.setBounds(640, 0, 1156, 748);
         try {
             jifListadoVehiculos.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -736,7 +738,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         jLabel27.setBounds(620, 0, 410, 540);
 
         desktopPane.add(jifAlquilarVehiculo);
-        jifAlquilarVehiculo.setBounds(640, 420, 941, 557);
+        jifAlquilarVehiculo.setBounds(640, 420, 106, 30);
         try {
             jifAlquilarVehiculo.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -893,7 +895,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         jScrollPane6.setBounds(20, 19, 326, 109);
 
         jifRecepcionVehiculo.getContentPane().add(jpRecepcionVehiculo);
-        jpRecepcionVehiculo.setBounds(279, 89, 433, 174);
+        jpRecepcionVehiculo.setBounds(279, 89, 0, 0);
 
         btnCalcularValorPagar.setText("Valor a Pagar");
         btnCalcularValorPagar.addActionListener(new java.awt.event.ActionListener() {
@@ -911,7 +913,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         jLabel24.setBounds(0, -2, 720, 430);
 
         desktopPane.add(jifRecepcionVehiculo);
-        jifRecepcionVehiculo.setBounds(780, 50, 738, 452);
+        jifRecepcionVehiculo.setBounds(780, 50, 107, 30);
         try {
             jifRecepcionVehiculo.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -968,7 +970,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         jLabel28.setBounds(600, -90, 430, 650);
 
         desktopPane.add(jifConfiguracionUsuario);
-        jifConfiguracionUsuario.setBounds(310, 0, 1027, 541);
+        jifConfiguracionUsuario.setBounds(310, 0, 110, 30);
         try {
             jifConfiguracionUsuario.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -1097,11 +1099,11 @@ public class MdiVehiculos extends javax.swing.JFrame {
             jifInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jifInicioLayout.createSequentialGroup()
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         desktopPane.add(jifInicio);
-        jifInicio.setBounds(40, -10, 1089, 694);
+        jifInicio.setBounds(40, -10, 1089, 668);
         try {
             jifInicio.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -1984,7 +1986,8 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
 
-        Usuario usuario = new Usuario(txtRegistrarCorreo.getText(), txtRegistarPassword.getText(),
+        Usuario usuario = new Usuario(txtRegistrarCorreo.getText(), 
+                encriptar.encriptarPassword("1217", txtRegistarPassword.getText()),
                 new TipoUsuario((byte) 2, "2"), txtRegistrarNombre.getText(),
                 txtRegistrarApellido.getText(), txtRegistrarCedula.getText(), Byte.parseByte(txtRegistrarEdad.getText()),
                 true, true);

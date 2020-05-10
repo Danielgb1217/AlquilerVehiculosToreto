@@ -3,7 +3,9 @@ package controlador;
 import Excepciones.*;
 import java.util.*;
 import java.util.regex.*;
+import javax.swing.JOptionPane;
 import modelo.*;
+import utilidades.Encriptacion;
 import utilidades.LeerArchivoPlano;
 
 /**
@@ -14,6 +16,7 @@ public class GestionUsuario {
 
     private TipoUsuario[] tipoUsuario;
     private List<Usuario> lstUsuarios;
+    private Encriptacion encriptar;
 
     /**
      *
@@ -21,6 +24,7 @@ public class GestionUsuario {
     public GestionUsuario() {
         llenarTipoUsuario();
         llenarUsuarios();
+        encriptar = new Encriptacion();
 
     }
 
@@ -46,15 +50,16 @@ public class GestionUsuario {
 
     public Usuario validarUsuario(String login, String password) throws UsuarioException {
         for (Usuario usuarioAutenticado : lstUsuarios) {
-//            System.out.println("usuarioAutenticado = " + usuarioAutenticado);
-            if (usuarioAutenticado.getLogin().compareTo(login) == 0 && usuarioAutenticado.getPasswd().compareTo(password) == 0) {
+            System.out.println("usuarioAutenticado = " + usuarioAutenticado.getPasswd());
+            if (usuarioAutenticado.getLogin().compareTo(login) == 0 && 
+                    encriptar.desencriptarPassword("1217", usuarioAutenticado.getPasswd()).compareTo(password) == 0) {
 
                 return usuarioAutenticado;
             }
 
         }
         if (true) {
-            throw new UsuarioException("El usuario no se encuentra registrado");
+            throw new UsuarioException("El usuario no se encuentra registrado");            
         }
         return null;
     }
