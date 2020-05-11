@@ -58,10 +58,10 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     public MdiVehiculos() {
         initComponents();
-        
+
         encriptar = new Encriptacion();
         enviarCorreo = new EnviarCorreo();
-                       
+
         gestionUsuario = new GestionUsuario(); //Instancio el control que permite crear la lista llenar usuarios y cargar
         alquilaVehiculo = new AlquilaVehiculo();    //Controlador para< alquilar vehiculos
         modeloTblCamionetas = (DefaultTableModel) tblListadosCamionetas.getModel();
@@ -119,6 +119,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         btnGuardarConfiguracionVehiculo = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
+        btnGenerarReportePdf = new javax.swing.JButton();
         jifRegistrarUsuario = new javax.swing.JInternalFrame();
         jLabel11 = new javax.swing.JLabel();
         txtRegistrarNombre = new javax.swing.JTextField();
@@ -535,8 +536,17 @@ public class MdiVehiculos extends javax.swing.JFrame {
         jifListadoVehiculos.getContentPane().add(jLabel29);
         jLabel29.setBounds(590, 30, 440, 440);
 
+        btnGenerarReportePdf.setText("Reporte PDF");
+        btnGenerarReportePdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReportePdfActionPerformed(evt);
+            }
+        });
+        jifListadoVehiculos.getContentPane().add(btnGenerarReportePdf);
+        btnGenerarReportePdf.setBounds(530, 470, 130, 30);
+
         desktopPane.add(jifListadoVehiculos);
-        jifListadoVehiculos.setBounds(640, 0, 1165, 756);
+        jifListadoVehiculos.setBounds(640, 0, 102, 30);
         try {
             jifListadoVehiculos.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -1921,7 +1931,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
 
-        Usuario usuario = new Usuario(txtRegistrarCorreo.getText(), 
+        Usuario usuario = new Usuario(txtRegistrarCorreo.getText(),
                 encriptar.encriptarPassword("1217", txtRegistarPassword.getText()),
                 new TipoUsuario((byte) 2, "2"), txtRegistrarNombre.getText(),
                 txtRegistrarApellido.getText(), txtRegistrarCedula.getText(), Byte.parseByte(txtRegistrarEdad.getText()),
@@ -2075,10 +2085,10 @@ public class MdiVehiculos extends javax.swing.JFrame {
             devolverVehiculoAlquilado(numeroFila).getKm()};
         JOptionPane.showMessageDialog(this, "Acaba de alquilar un vehiculo tipo " + informeAlquiler[1] + " de placas "
                 + informeAlquiler[2] + "", "Congratulations", 2);
-        
-        enviarCorreo.enviarCorreo("El usuario "+ usuarioAutenticado.toString()+" Acaba de alquilar un vehiculo tipo " + informeAlquiler[1] + " de placas "
+
+        enviarCorreo.enviarCorreo("El usuario " + usuarioAutenticado.toString() + " Acaba de alquilar un vehiculo tipo " + informeAlquiler[1] + " de placas "
                 + informeAlquiler[2]);
-        
+
         return informeAlquiler;
     }
 
@@ -2120,7 +2130,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
             modeloAlquilerVehiculo.setValueAt(false, numeroFila, 4);
             calcularDiasAlquiler(numeroFila);
-            
 
         }
         escribirArchivoPlanoTablasVehiculos();  //Actualiza el valor  de la tabla de alquilar quitando de la lista
@@ -2426,7 +2435,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
                     + porcentaje + "%");
 
 //            JOptionPane.showMessageDialog(null, promedio);
-
             //***********************************GRAFICAR Barras*************************
             DefaultCategoryDataset categoria = new DefaultCategoryDataset();
 
@@ -2474,6 +2482,19 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private void txtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatriculaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMatriculaActionPerformed
+
+    private void btnGenerarReportePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReportePdfActionPerformed
+
+        try {
+            GenerarPdf pdf = new GenerarPdf();
+            pdf.crearPdf(gestionVehiculo.getLstVehiculos());
+            pdf.abriPdf();
+        } catch (Exception ex) {
+            Logger.getLogger(MdiVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btnGenerarReportePdfActionPerformed
 
     private double devolverVehiculosDisponibles(String vehiculo) {
         double numero = 0;
@@ -2760,6 +2781,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private javax.swing.JButton btnCalcularValorPagar;
     private javax.swing.JButton btnDesactivar;
     private javax.swing.JButton btnEliminarVehiculo;
+    private javax.swing.JButton btnGenerarReportePdf;
     private javax.swing.JButton btnGuardarConfiguracionUsuario;
     private javax.swing.JButton btnGuardarConfiguracionVehiculo;
     private javax.swing.JButton btnIngresar;
