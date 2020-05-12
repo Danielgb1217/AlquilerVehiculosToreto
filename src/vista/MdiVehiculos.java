@@ -2486,6 +2486,8 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private void btnGenerarReportePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReportePdfActionPerformed
 
         try {
+            
+            gestionVehiculo.llenarVehiculos();
             GenerarPdf pdf = new GenerarPdf();
             pdf.crearPdf(gestionVehiculo.getLstVehiculos());
             pdf.abriPdf();
