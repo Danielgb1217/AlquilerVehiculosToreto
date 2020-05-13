@@ -743,11 +743,11 @@ public class MdiVehiculos extends javax.swing.JFrame {
             }
         });
         jifRecepcionVehiculo.getContentPane().add(txtBuscarMatriculaRecepcionVehiculo);
-        txtBuscarMatriculaRecepcionVehiculo.setBounds(520, 0, 100, 30);
+        txtBuscarMatriculaRecepcionVehiculo.setBounds(770, 10, 100, 30);
 
         jLabel16.setText("Matricula");
         jifRecepcionVehiculo.getContentPane().add(jLabel16);
-        jLabel16.setBounds(460, 0, 75, 29);
+        jLabel16.setBounds(700, 10, 75, 29);
 
         btnBuscarMatriculaRecepcionVehiculo.setText("Buscar");
         btnBuscarMatriculaRecepcionVehiculo.addActionListener(new java.awt.event.ActionListener() {
@@ -756,7 +756,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
             }
         });
         jifRecepcionVehiculo.getContentPane().add(btnBuscarMatriculaRecepcionVehiculo);
-        btnBuscarMatriculaRecepcionVehiculo.setBounds(620, 0, 82, 29);
+        btnBuscarMatriculaRecepcionVehiculo.setBounds(870, 10, 82, 29);
 
         chbCojineria.setText("Cojineria");
         chbCojineria.addActionListener(new java.awt.event.ActionListener() {
@@ -813,9 +813,9 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 .addComponent(chbAntena)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chbRadio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(6, 6, 6)
                 .addComponent(chbCarroceria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chbTapetes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chbBotiquin)
@@ -829,7 +829,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         );
 
         jifRecepcionVehiculo.getContentPane().add(jpRecepcionVehiculoCamioneta);
-        jpRecepcionVehiculoCamioneta.setBounds(560, 40, 160, 270);
+        jpRecepcionVehiculoCamioneta.setBounds(820, 190, 160, 270);
 
         jpRecepcionVehiculo.setEnabled(false);
         jpRecepcionVehiculo.setLayout(null);
@@ -837,10 +837,10 @@ public class MdiVehiculos extends javax.swing.JFrame {
         jScrollPane6.setViewportView(txtpRecepcionVehiculo);
 
         jpRecepcionVehiculo.add(jScrollPane6);
-        jScrollPane6.setBounds(20, 19, 326, 109);
+        jScrollPane6.setBounds(10, 20, 326, 109);
 
         jifRecepcionVehiculo.getContentPane().add(jpRecepcionVehiculo);
-        jpRecepcionVehiculo.setBounds(279, 89, 0, 0);
+        jpRecepcionVehiculo.setBounds(640, 50, 350, 160);
 
         btnCalcularValorPagar.setText("Valor a Pagar");
         btnCalcularValorPagar.addActionListener(new java.awt.event.ActionListener() {
@@ -849,13 +849,13 @@ public class MdiVehiculos extends javax.swing.JFrame {
             }
         });
         jifRecepcionVehiculo.getContentPane().add(btnCalcularValorPagar);
-        btnCalcularValorPagar.setBounds(560, 350, 110, 40);
+        btnCalcularValorPagar.setBounds(660, 270, 110, 40);
         jifRecepcionVehiculo.getContentPane().add(txtValorPagar);
-        txtValorPagar.setBounds(560, 310, 155, 37);
+        txtValorPagar.setBounds(660, 230, 155, 37);
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/recepcionVehiculo.JPG"))); // NOI18N
         jifRecepcionVehiculo.getContentPane().add(jLabel24);
-        jLabel24.setBounds(0, -2, 720, 430);
+        jLabel24.setBounds(10, 10, 630, 450);
 
         desktopPane.add(jifRecepcionVehiculo);
         jifRecepcionVehiculo.setBounds(780, 50, 107, 30);
@@ -1394,7 +1394,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
                             txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
                             Double.parseDouble(txtValorAlquiler.getText()));
                     if (!validarCamioneta(camioneta)) {
-                        //Convierto el objeto camion en un arreglo de tipo object a traves del metodo y adiciono este arreglo a la tabla
+                        //Convierto el objeto camionETA en un arreglo de tipo object a traves del metodo y adiciono este arreglo a la tabla
 
                         modeloTblCamionetas.addRow(camioneta.obtenerArregloObjeto());
                     }
@@ -1855,7 +1855,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
                         }
 
                     } //Validacion para el tipo carro  ---------------------------------------------------------------
-                    else if (itemCarro.compareToIgnoreCase("carro") == 0) {
+                    else if (itemCamioneta.compareToIgnoreCase("carro") == 0) {
 
                         Carro carro = new Carro((new TipoVehiculo("Carro", (byte) 2)), chbExtras.isSelected(),
                                 txtMatricula.getText(), Integer.parseInt(txtKm.getText()), chbDisponibilidad.isSelected(),
@@ -1865,7 +1865,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
                         for (int i = 0; i < tblListadoCarros.getRowCount(); i++) {
 
                             Carro carroTabla = obtenerObjetoTablaCarro(i);
-                            if (carroTabla.getMatricula().compareTo("Ihabilitado " + carro.getMatricula()) == 0) {
+                            if (carroTabla.getMatricula().compareTo("Inhabilitado " + carro.getMatricula()) == 0) {
 
                                 String[] datos = modeloTblCarros.getValueAt(i, 2).toString().split(" ");
                                 modeloTblCarros.setValueAt(datos[1], i, 2);
@@ -1886,7 +1886,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
                         for (int i = 0; i < tblListadoMotos.getRowCount(); i++) {
 
                             Moto motoTabla = obtenerObjetoTablaMoto(i);
-                            if (motoTabla.getMatricula().compareTo("Ihabilitado " + moto.getMatricula()) == 0) {
+                            if (motoTabla.getMatricula().compareTo("Inhabilitado " + moto.getMatricula()) == 0) {
 
                                 String[] datos = modeloTblMotos.getValueAt(i, 2).toString().split(" ");
                                 modeloTblMotos.setValueAt(datos[1], i, 2);
@@ -2094,6 +2094,9 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
     private void bntConfirmarAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConfirmarAlquilerActionPerformed
 
+        if(usuarioAutenticado.isAudicion() && usuarioAutenticado.isVision()&& 
+                usuarioAutenticado.getEdad() >= (byte)18){
+        
         //guarda en una lista las filas en donde se presenta true en el campo de alquilar vehiculos 
         vehiculoAlquilar.clear();
         for (int i = 0; i < modeloAlquilerVehiculo.getRowCount(); i++) {
@@ -2138,6 +2141,10 @@ public class MdiVehiculos extends javax.swing.JFrame {
         escribirReporteHorasAlquilerVehiculos();
 
         ocultarJiframes();
+        
+        }else{
+            JOptionPane.showMessageDialog(this, "El usuario no puede alquilar vehiculos", "Advertencia", 0);
+        }
 
     }//GEN-LAST:event_bntConfirmarAlquilerActionPerformed
 
@@ -2304,7 +2311,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
                                 if (tblListadoMotos.getValueAt(x, 2).equals(modeloTblInformeAlquiler.getValueAt(j, 2))) {
                                     //Si encuentro coincidencia instancio el nuevo vehiculo para abstraer el objeto vehiculo
                                     //************************************ Instancia de Vehiculo***********************************              
-                                    AbstractVehiculo vehiculo = new Carro(new TipoVehiculo("Moto", (byte) 3),
+                                    AbstractVehiculo vehiculo = new Moto(new TipoVehiculo("Moto", (byte) 3),
                                             (boolean) tblListadoMotos.getValueAt(x, 1),
                                             tblListadoMotos.getValueAt(x, 2).toString(),
                                             (int) tblListadoMotos.getValueAt(x, 3),
@@ -2315,15 +2322,15 @@ public class MdiVehiculos extends javax.swing.JFrame {
                                     Usuario usuario = usuarioAutenticado;
 
                                     if (Integer.parseInt(txtKmRecpcion.getText()) < vehiculo.getKm()) {
-                                        JOptionPane.showMessageDialog(this, "Los km ingresados son errados",
-                                                "Error", 0);
+                                       
+                                        JOptionPane.showMessageDialog(this, "Los km ingresados son errados","Error", 0);
                                     } else {
                                         txtpRecepcionVehiculo.setText("" + vehiculo.getKm());
 
                                         //*************************Km recorridos por el vehiculo neesarios para calcular el costo
                                         int kmRecorridos = Integer.parseInt(txtKmRecpcion.getText()) - Integer.parseInt(""
-                                                + modeloTblCarros.getValueAt(x, 3));
-
+                                                + modeloTblMotos.getValueAt(x, 3));
+                                       
                                         tblListadoMotos.setValueAt(true, x, 4);
                                         tblListadoMotos.setValueAt(txtKmRecpcion.getText(), x, 3);
                                         escribirArchivoPlanoTablasVehiculos();
@@ -2486,7 +2493,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private void btnGenerarReportePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReportePdfActionPerformed
 
         try {
-            
+
             gestionVehiculo.llenarVehiculos();
             GenerarPdf pdf = new GenerarPdf();
             pdf.crearPdf(gestionVehiculo.getLstVehiculos());
@@ -2628,10 +2635,10 @@ public class MdiVehiculos extends javax.swing.JFrame {
             if (camioneta.getMatricula().compareTo(camionetaTabla.getMatricula()) == 0) {
                 try {
                     llamarExcepcionMatriculasIguales(1);
-                    return true;
                 } catch (VehiculosException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 0);
                 }
+                return true;
             }
         }
         return false;
@@ -2658,10 +2665,11 @@ public class MdiVehiculos extends javax.swing.JFrame {
             if (moto.getMatricula().compareTo(motoTabla.getMatricula()) == 0) {
                 try {
                     llamarExcepcionMatriculasIguales(3);
-                    return true;
                 } catch (VehiculosException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 0);
                 }
+
+                return true;
             }
         }
         return false;
