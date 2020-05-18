@@ -56,7 +56,6 @@ public class GestionUsuario {
 
                 return usuarioAutenticado;
             }
-
         }
         if (true) {
             throw new UsuarioException("El usuario no se encuentra registrado");            

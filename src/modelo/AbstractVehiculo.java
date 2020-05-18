@@ -32,8 +32,7 @@ public abstract class AbstractVehiculo implements VehiculoAble {
     public abstract double calcularAlquiler(int km);
 
     
-    public String mostrarDatos(){
-       
+    public String mostrarDatos(){      
         
          return null;
     }

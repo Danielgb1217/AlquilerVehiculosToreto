@@ -20,8 +20,7 @@ public class GestionVehiculo implements Serializable {
        
     }
 
-    public void llenarVehiculos() {
-        
+    public void llenarVehiculos() {      
         
         lstVehiculos = LeerArchivoPlano.cargarVehiculos(tipoVehiculo);
 

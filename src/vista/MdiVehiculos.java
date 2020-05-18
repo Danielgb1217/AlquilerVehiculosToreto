@@ -1159,18 +1159,16 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_mnuSalirActionPerformed
+
 //Ingreso del Login----------------------------------------------
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
 
         jifInicio.setVisible(true);
         //Validacion si se ha escrito algo en el user
         if (txtLogin.getText() == null || txtLogin.getText().compareTo("") == 0) {
-
             JOptionPane.showMessageDialog(this, "Debe diiligenciar el campo de Usuario", "Datos Faltantes", 0);
-
         } //Validacion si se ha escrito algo en password
         else if (txtPassword.getPassword().length == 0) {
-
             JOptionPane.showMessageDialog(this, "Debe diiligenciar el password", "Datos Faltantes", 0);
         } //validacion si es un correo electronico Expresion regular 
         else {
@@ -1181,7 +1179,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
                     //Validar que el usuario este REGISTRADO
                     usuarioAutenticado = gestionUsuario.validarUsuario(txtLogin.getText(), txtPassword.getText());
                     if (usuarioAutenticado != null) {
-
                         gestionVehiculo = new GestionVehiculo();    //cargo las vehiculos del archivo a la lista
                         JOptionPane.showMessageDialog(this, "Bienvenido " + usuarioAutenticado, "Ingresó como "
                                 + usuarioAutenticado.getTipoUsuario().getDescripcion(), 2);
@@ -1190,16 +1187,12 @@ public class MdiVehiculos extends javax.swing.JFrame {
                         gestionPermisosMnu();   //habilita los menus
                     } else {
                         JOptionPane.showMessageDialog(this, "Error", "Datos de Ingreso Erroneos", 2);
-
                     }
-
                 }
             } catch (UsuarioException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos Erroneos", 0);
             }
-
         }
-
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void mnuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCerrarSesionActionPerformed
@@ -1223,9 +1216,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         modeloTblCarros.getDataVector().removeAllElements();
         modeloTblMotos.getDataVector().removeAllElements();
         modeloTblInformeAlquiler.getDataVector().removeAllElements();
-//        for (int i = 0; i < gestionVehiculo.getLstVehiculos().size(); i++) {
-//            gestionVehiculo.getLstVehiculos().remove(i);//
-//        }
+
         for (AbstractVehiculo vehiculo : gestionVehiculo.getLstVehiculos()) {
             if (vehiculo.getTipoVehiculo().getCodigo() == (byte) 1) {
                 //COn Instace of puedo saber si un objeto es instancia de alguna clase EJ...
@@ -1233,7 +1224,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 modeloTblCamionetas.addRow(vehiculo.obtenerArregloObjeto());
 
             } else if (vehiculo.getTipoVehiculo().getCodigo() == (byte) 2) {
-
                 modeloTblCarros.addRow(vehiculo.obtenerArregloObjeto());
             } else if (vehiculo.getTipoVehiculo().getCodigo() == (byte) 3) {
                 modeloTblMotos.addRow(vehiculo.obtenerArregloObjeto());
@@ -1245,11 +1235,9 @@ public class MdiVehiculos extends javax.swing.JFrame {
         tblListadoMotos.setModel(modeloTblMotos);
 
         for (InformeAlquiler informeAlquiler : alquilaVehiculo.llenarInformeVehiculos()) {
-
             modeloTblInformeAlquiler.addRow(informeAlquiler.obtenerArregloObjeto());
         }
         tblInformeAlquiler.setModel(modeloTblInformeAlquiler);
-
     }
 
     private void pintarTblConfiguracionUsuario() {
@@ -1294,8 +1282,8 @@ public class MdiVehiculos extends javax.swing.JFrame {
         if (jifListadoVehiculos.isIcon()) {   //SI esta minimizada al presiona en el menu se maximiza
             try {
                 jifListadoVehiculos.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(MdiVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error al mostrar listado");
             }
         }
     }//GEN-LAST:event_mnuVehiculosDisponilbesActionPerformed
@@ -1306,8 +1294,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
         jifEstadisticaDisponibilidadVehiculos.setVisible(true);
         alquilaVehiculo.llenarReporteDisponibilidadVehiculos();
         pintarTblReporteDisponibilidadVehiculos();
-
-
     }//GEN-LAST:event_mnuEstadisticaDisponibilidadActionPerformed
     private boolean validarCampoKm() {
         try {
@@ -1365,7 +1351,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
     }
 
     private void limpiarCamposConfiguracion() {
-
         jspCapacidadVehiculo.setValue(0);
         chbExtras.setSelected(false);
         chbCasco.setSelected(false);
@@ -1376,7 +1361,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
         tblListadosCamionetas.clearSelection();
         tblListadoCarros.clearSelection();
         tblListadoMotos.clearSelection();
-
     }
 
 
@@ -1581,7 +1565,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
         }
 
         escribirInformeAlquiler();
-
         limpiarCamposConfiguracion();
     }
 
@@ -1589,7 +1572,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
         EscribirArchivoPlano.borrarArchivoConfiguracionUsuario();
 
         for (int i = 0; i < tblConfiguracionUsuario.getRowCount(); i++) {
-
             Usuario usuarioTabla = obtenerObjetoTablaConfiguracionUsaurio(i);
             EscribirArchivoPlano.escribir(usuarioTabla);
         }
@@ -1726,7 +1708,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
                                 break;
                             }
                         }
-
                     } //Validacion para el tipo carro  ---------------------------------------------------------------
                     else if (itemCarro.compareToIgnoreCase("carro") == 0) {
 
@@ -1769,24 +1750,18 @@ public class MdiVehiculos extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(this, "Moto desactivada", "Dat", 0);
                                 break;
                             }
-
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(this, "Debe diligenciar tipo Y/O Capacidad, casco, Eztra",
                                 "Datos Faltantes", 0);
                     }
                     limpiarCamposConfiguracion();
-
                 }
             } catch (VehiculosException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos Erroneos", 0);
             }
         }
-
         limpiarCamposConfiguracion();
-
-
     }//GEN-LAST:event_btnDesactivarActionPerformed
 
 
@@ -1894,15 +1869,12 @@ public class MdiVehiculos extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(this, "Moto Activada", "Dat", 0);
                                 break;
                             }
-
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(this, "Debe diligenciar tipo Y/O Capacidad, casco, Eztra",
                                 "Datos Faltantes", 0);
                     }
                     limpiarCamposConfiguracion();
-
                 }
             } catch (VehiculosException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos Erroneos", 0);
@@ -1936,14 +1908,12 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 new TipoUsuario((byte) 2, "2"), txtRegistrarNombre.getText(),
                 txtRegistrarApellido.getText(), txtRegistrarCedula.getText(), Byte.parseByte(txtRegistrarEdad.getText()),
                 true, true);
-
         if (validarRegistroUsuario()) {
 
             EscribirArchivoPlano.escribir(usuario);
             gestionUsuario.llenarUsuarios();
             jifRegistrarUsuario.hide();
         }
-
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
@@ -1954,11 +1924,9 @@ public class MdiVehiculos extends javax.swing.JFrame {
         txtRegistrarApellido.setVisible(true);
         txtRegistrarCedula.setVisible(true);
         txtRegistrarCorreo.setVisible(true);
-
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void ocultarJiframes() {
-
         jifAlquilarVehiculo.setVisible(false);
         jifInformeAlquiler.setVisible(false);
         jifListadoVehiculos.setVisible(false);
@@ -1968,7 +1936,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
         jifConfiguracionUsuario.setVisible(false);
         jifEstadisticaDisponibilidadVehiculos.setVisible(false);
         jifInicio.setVisible(false);
-
     }
 
     private void validarVehiculosDisponibles() {
@@ -1990,14 +1957,12 @@ public class MdiVehiculos extends javax.swing.JFrame {
             }
         }
         escribirArchivoPlanoTablasVehiculos();
-
     }
 
     private void mnuAlquilarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAlquilarVehiculosActionPerformed
         pintarTablaAlquilarVehiculos();
         ocultarJiframes();
         jifAlquilarVehiculo.setVisible(true);
-
     }//GEN-LAST:event_mnuAlquilarVehiculosActionPerformed
 
     private void pintarTablaAlquilarVehiculos() {
@@ -2012,7 +1977,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
         for (int i = 0; i < modeloTblCamionetas.getRowCount(); i++) {
             if ((boolean) modeloTblCamionetas.getValueAt(i, 4)) {
-
                 for (int j = 0; j < modeloTblCamionetas.getColumnCount(); j++) {
                     filaCamionetas[j] = modeloTblCamionetas.getValueAt(i, j);
                 }
@@ -2039,7 +2003,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
             }
         }
         tblAlquilarVehiculo.setModel(modeloAlquilerVehiculo);
-
     }
 
     private void calcularDiasAlquiler(int numeroFila) {
@@ -2064,17 +2027,13 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 }
 
                 modeloTblInformeAlquiler.addRow(obtenerArregloObjetoInformeAlquiler(numeroFila, diasAlquiler));
-
                 //LLena la lista de reposte de horas para hallar la disponibilidad
                 reporteHorasAlquiler.add(new InformeAlquiler(devolverVehiculoAlquilado(numeroFila).getTipoVehiculo().getTipoVehiculo(),
-                        devolverVehiculoAlquilado(numeroFila).getMatricula(), fecha, fechaFinal, diasAlquiler));
-//               
-
+                        devolverVehiculoAlquilado(numeroFila).getMatricula(), fecha, fechaFinal, diasAlquiler));             
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Debe diligenciar correctamente las fechas", "Datos Erroneos", 0);
         }
-
     }
 
     private Object[] obtenerArregloObjetoInformeAlquiler(int numeroFila, int diasAlquiler) {
@@ -2088,21 +2047,17 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
         enviarCorreo.enviarCorreo("El usuario " + usuarioAutenticado.toString() + " Acaba de alquilar un vehiculo tipo " + informeAlquiler[1] + " de placas "
                 + informeAlquiler[2]);
-
         return informeAlquiler;
     }
 
     private void bntConfirmarAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConfirmarAlquilerActionPerformed
 
         if(usuarioAutenticado.isAudicion() && usuarioAutenticado.isVision()&& 
-                usuarioAutenticado.getEdad() >= (byte)18){
-        
+                usuarioAutenticado.getEdad() >= (byte)18){        
         //guarda en una lista las filas en donde se presenta true en el campo de alquilar vehiculos 
         vehiculoAlquilar.clear();
         for (int i = 0; i < modeloAlquilerVehiculo.getRowCount(); i++) {
-
             if ((boolean) modeloAlquilerVehiculo.getValueAt(i, 7)) {
-//            numeroFila = tblAlquilarVehiculo.getSelectedRow();
                 vehiculoAlquilar.add(i);        //Lista con los numero de las filas en donde estan alquilados los vehicu
             }
         }
@@ -2133,32 +2088,26 @@ public class MdiVehiculos extends javax.swing.JFrame {
 
             modeloAlquilerVehiculo.setValueAt(false, numeroFila, 4);
             calcularDiasAlquiler(numeroFila);
-
         }
         escribirArchivoPlanoTablasVehiculos();  //Actualiza el valor  de la tabla de alquilar quitando de la lista
 //                //el vehiculo que ya no esta disponible
         escribirInformeAlquiler();
         escribirReporteHorasAlquilerVehiculos();
-
         ocultarJiframes();
         
         }else{
             JOptionPane.showMessageDialog(this, "El usuario no puede alquilar vehiculos", "Advertencia", 0);
         }
-
     }//GEN-LAST:event_bntConfirmarAlquilerActionPerformed
 
     private void escribirInformeAlquiler() {
 
 //     Escribo el vehiculo en la lista de infrome vehiculos y los guardo en un archivo plano
         EscribirArchivoPlano.borrarArchivoInformeVehiculos();
-//        JOptionPane.showMessageDialog(null, tblInformeAlquiler.getRowCount());
         for (int i = 0; i < tblInformeAlquiler.getRowCount(); i++) {
-
             Object[] informeAlquiler = obtenerObjetoTablaInformeAlquiler(i);
             EscribirArchivoPlano.escribirInformeAlquiler(informeAlquiler);
         }
-
     }
 
     //Escribo en un archivo plano la lista creada con los vehculos alquilados y sus respectivas fechas de entrega y salida
@@ -2167,17 +2116,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
         alquilaVehiculo.llenarReporteDisponibilidadVehiculos();
         pintarTblReporteDisponibilidadVehiculos();
         Integer diasAlquilado;
-//        EscribirArchivoPlano.borrarArchivoReporteHorasVehiculos();
         for (InformeAlquiler reporteHoras : this.reporteHorasAlquiler) {
-
-//            for (int i = 0; i < modeloTblReporteDisponibilidadVehiculos.getRowCount(); i++) {
-//                if (reporteHoras.getMatricula().equals(modeloTblReporteDisponibilidadVehiculos.getValueAt(i, 1))) {
-//                    diasAlquilado = Integer.parseInt("" + reporteHoras.getDiasAlquiler())
-//                            + Integer.parseInt("" + modeloTblReporteDisponibilidadVehiculos.getValueAt(i, 4));
-//                    reporteHoras.setDiasAlquiler(diasAlquilado);
-//                    reporteHoras.setFechaInicio(modeloTblReporteDisponibilidadVehiculos.getValueAt(i, 2));
-//                }
-//            }
             EscribirArchivoPlano.escribirReporteHorasAlquiler(reporteHoras);
         }
         this.reporteHorasAlquiler.clear();
@@ -2196,17 +2135,13 @@ public class MdiVehiculos extends javax.swing.JFrame {
         ocultarJiframes();
         jpRecepcionVehiculo.setVisible(false);
         jifRecepcionVehiculo.setVisible(true);
-
-
     }//GEN-LAST:event_mnuRecepcionVehiculoActionPerformed
 
     private void mnuReporteVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuReporteVehiculosActionPerformed
 
         iniciarTablas();
         ocultarJiframes();
-
         jifInformeAlquiler.setVisible(true);
-
     }//GEN-LAST:event_mnuReporteVehiculosActionPerformed
 
     private void btnBuscarMatriculaRecepcionVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMatriculaRecepcionVehiculoActionPerformed
@@ -2214,7 +2149,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
         for (int j = 0; j < tblInformeAlquiler.getRowCount(); j++) {
             if (txtBuscarMatriculaRecepcionVehiculo.getText().equalsIgnoreCase(modeloTblInformeAlquiler.getValueAt(j, 2).toString())) {
                 jpRecepcionVehiculo.setVisible(true);
-//                txtValorPagar.setVisible(false);
                 txtpRecepcionVehiculo.setText("Vehiculo tipo " + modeloTblInformeAlquiler.getValueAt(j, 1)
                         + " de placas " + modeloTblInformeAlquiler.getValueAt(j, 2) + " con " + modeloTblInformeAlquiler.getValueAt(j, 5)
                         + " Km");
@@ -2302,7 +2236,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
                                         break;
                                     }
                                 }
-
                             }
                             break;
 
@@ -2343,36 +2276,24 @@ public class MdiVehiculos extends javax.swing.JFrame {
                                 }
                             }
                             break;
-
                     }
                 }
-
-//                        modeloTblCamionetas.setValueAt(txtKmRecpcion.getText(), j, NORMAL);
             }
         }
-
     }//GEN-LAST:event_btnBuscarMatriculaRecepcionVehiculoActionPerformed
 
-//    private void calcularValorPagar(double costoAlquiler) {
-//
-////        txtValorPagar.setText(""+vehiculo.calcularAlquiler(kmRecorridos));
-//        System.out.println(vehiculo.calcularAlquiler(kmRecorridos));
-//    }
 
     private void btnCalcularValorPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularValorPagarActionPerformed
         txtValorPagar.setVisible(true);
-
     }//GEN-LAST:event_btnCalcularValorPagarActionPerformed
 
     private void mnuConfiguracionUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConfiguracionUsuarioActionPerformed
         ocultarJiframes();
         jifConfiguracionUsuario.setVisible(true);
         pintarTblConfiguracionUsuario();
-
     }//GEN-LAST:event_mnuConfiguracionUsuarioActionPerformed
 
     private void btnGuardarConfiguracionUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarConfiguracionUsuarioActionPerformed
-
         escribirArchivoPlanoTablaConfiguracionUsuario();
     }//GEN-LAST:event_btnGuardarConfiguracionUsuarioActionPerformed
 
@@ -2383,7 +2304,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private LocalDate devolverFecha(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fecha = LocalDate.parse(date, formatter);
-
         return fecha;
     }
 
@@ -2391,7 +2311,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private void btnReporteDisponibilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteDisponibilidadActionPerformed
 
         try {
-
             int promedio = 0;
             int contador = 0;
             LocalDate fechaInicialReporte = LocalDate.of(jdFechaInicialReporteDisponibilidad.getDate().getYear() + 1900,
@@ -2412,12 +2331,10 @@ public class MdiVehiculos extends javax.swing.JFrame {
                     //Si el vehiculo de la lista esta en el rango de fechas de la busqueda se mostrara en el reporte de disponibilidad
                     if (devolverFecha("" + modeloTblReporteDisponibilidadVehiculos.getValueAt(i, 2)).isAfter(fechaInicialReporte)
                             && devolverFecha("" + modeloTblReporteDisponibilidadVehiculos.getValueAt(i, 3)).isBefore(fechaFinalReporte)) {
-
                         promedio = promedio + Integer.parseInt("" + modeloTblReporteDisponibilidadVehiculos.getValueAt(i, 4));
                         contador++;
                     } else if (devolverFecha("" + modeloTblReporteDisponibilidadVehiculos.getValueAt(i, 3)).isAfter(fechaInicialReporte)
                             && devolverFecha("" + modeloTblReporteDisponibilidadVehiculos.getValueAt(i, 3)).isBefore(fechaFinalReporte)) {
-
                         promedio = promedio + devolverFecha("" + modeloTblReporteDisponibilidadVehiculos.getValueAt(i, 3)).getDayOfYear()
                                 - fechaInicialReporte.getDayOfYear(); //  
                         contador++;
@@ -2433,15 +2350,12 @@ public class MdiVehiculos extends javax.swing.JFrame {
                         promedio = promedio + fechaFinalReporte.getDayOfYear() - fechaInicialReporte.getDayOfYear();
                         contador++;
                     }
-
                 }
             }
-
             int porcentaje = (promedio / contador) * 100 / (fechaFinalReporte.getDayOfYear() - fechaInicialReporte.getDayOfYear());
             JOptionPane.showMessageDialog(null, "El promedio de dias que estan ocupados los vehiculos es "
                     + porcentaje + "%");
 
-//            JOptionPane.showMessageDialog(null, promedio);
             //***********************************GRAFICAR Barras*************************
             DefaultCategoryDataset categoria = new DefaultCategoryDataset();
 
@@ -2461,9 +2375,7 @@ public class MdiVehiculos extends javax.swing.JFrame {
             ChartPanel ch = new ChartPanel(f);
             add(ch);
             ch.setBounds(600, 250, 400, 300);
-//        ChartFrame freme = new ChartFrame(preuba, f);
-//       
-//        freme.setVisible(true); 
+
 //            //*************************GRAFICA PASTEL*****************
 
             pintarTablaAlquilarVehiculos();
@@ -2472,7 +2384,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
             pastel.setValue("Camionetas Disponibles", devolverVehiculosDisponibles("Camioneta"));
             pastel.setValue("Carros Disponibles", devolverVehiculosDisponibles("Carro"));
             pastel.setValue("Motos Disponibles", devolverVehiculosDisponibles("Moto"));
-//            pastel.setValue("Promedio Vehiculos Ocupados", (double) porcentaje);
 
             JFreeChart graficaPastel = ChartFactory.createPieChart3D("Porcentajes de Vehiculos", pastel);
             ChartPanel chartPastel = new ChartPanel(graficaPastel);
@@ -2482,8 +2393,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
         } catch (Exception ex) {;
             JOptionPane.showMessageDialog(this, "Debe diligenciar correctamente las fechas", "Fallo", 0);
         }
-
-
     }//GEN-LAST:event_btnReporteDisponibilidadActionPerformed
 
     private void txtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatriculaActionPerformed
@@ -2493,13 +2402,12 @@ public class MdiVehiculos extends javax.swing.JFrame {
     private void btnGenerarReportePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReportePdfActionPerformed
 
         try {
-
             gestionVehiculo.llenarVehiculos();
             GenerarPdf pdf = new GenerarPdf();
             pdf.crearPdf(gestionVehiculo.getLstVehiculos());
             pdf.abriPdf();
         } catch (Exception ex) {
-            Logger.getLogger(MdiVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al generar reporte");
         }
 
 
@@ -2536,7 +2444,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
                     (int) modeloAlquilerVehiculo.getValueAt(numeroFila, 3),
                     (boolean) modeloAlquilerVehiculo.getValueAt(numeroFila, 4),
                     (double) modeloAlquilerVehiculo.getValueAt(numeroFila, 5));
-
             return carro;
 
         } else if (modeloAlquilerVehiculo.getValueAt(numeroFila, 0).toString().compareToIgnoreCase("Moto") == 0) {
@@ -2547,7 +2454,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
                     (int) modeloAlquilerVehiculo.getValueAt(numeroFila, 3),
                     (boolean) modeloAlquilerVehiculo.getValueAt(numeroFila, 4),
                     (double) modeloAlquilerVehiculo.getValueAt(numeroFila, 5));
-
             return moto;
         }
         return null;
@@ -2619,7 +2525,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 tipoUsuario = 3;
                 tipo = "3";
                 break;
-
         }
         Usuario usuario = new Usuario("" + fila[0], "" + fila[1], (new TipoUsuario(tipoUsuario, tipo)),
                 "" + fila[3], "" + fila[4], "" + fila[5], Byte.parseByte("" + fila[6]),
@@ -2668,7 +2573,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 } catch (VehiculosException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 0);
                 }
-
                 return true;
             }
         }
@@ -2732,7 +2636,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
     }
 
     private void iniciarMenus(boolean estado) {
-
         tblListadosCamionetas.setEnabled(estado);
         tblListadoCarros.setEnabled(estado);
         tblListadoMotos.setEnabled(estado);
@@ -2744,7 +2647,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
         mnuRecepcionVehiculo.setVisible(estado);
         mnuReporteVehiculos.setVisible(estado);
         mnuVehiculosDisponilbes.setVisible(estado);
-
     }
 
     private void gestionPermisosMnu() {
@@ -2757,13 +2659,11 @@ public class MdiVehiculos extends javax.swing.JFrame {
                 break;
             case 2:
                 iniciarMenus(false);//Uduario general
-                mnuVehiculosDisponilbes.setVisible(true);
-                jpConfiguracionVehiculo.hide();
-
+                mnuAlquilarVehiculos.setVisible(true);
+                
                 break;
             case 3:
                 iniciarMenus(true);
-
                 mnuReporteVehiculos.setVisible(false);
                 jpConfiguracionVehiculo.hide();
                 break;
@@ -2774,7 +2674,6 @@ public class MdiVehiculos extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MdiVehiculos().setVisible(true);
